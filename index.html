@@ -7,6 +7,65 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
+    <header>
+      <h1>GitFitNotFat</h1>
+    </header>
+    <main>
+      <div id="name-container">
+        <form id="getName">
+          <input id="name" type="text" placeholder="Enter Your Name" />
+          <input id="weight" type="text" placeholder="Enter Your Weight" />
+          <button>Start Getting Not Fat!</button>
+        </form>
+      </div>
+      <hr />
+      <div id="instructions-container">
+        <h2>Hello, ${Name}!</h2>
+        <h3>How to Not Get Fat:</h3>
+        <p>Some Words Here Blurb</p>
+        <button>Begin!</button>
+      </div>
+      <hr />
+      <div class="recipeInput">
+        <img src="" alt="recipe card" />
+        <form id="recipeSearch">
+          <input
+            type="text"
+            name="recipe"
+            id="search-recipe"
+            placeholder="Search a Recipe Here!"
+          />
+        </form>
+      </div>
+      <hr />
+      <div id="recipe-container">
+        <h2 id="recipe-item">Recipe Item</h2>
+        <ul>
+          <li>Serving Size:</li>
+          <li>Calories</li>
+          <li>Serving Size?</li>
+          <li>Calories?</li>
+          <li>Carbs?</li>
+          <li>Protein?</li>
+        </ul>
+        <img src="" alt="recipe card or hero " />
+      </div>
+      <div id="workout-container">
+        <form id="workout-search">
+          <input type="text" placeholder="Search Your Workout Here!" />
+        </form>
+      </div>
+      <hr />
+      <div id="workout-output-container">
+        <img src="" alt="Nate's Workout Demo" />
+        <h2 id="workout-name">Workout That Nate Will Demo</h2>
+        <ul>
+          <li>Duration</li>
+          <li>Calories - Math Done Here</li>
+        </ul>
+        <button id="reset" type="reset">Reset</button>
+      </div>
+    </main>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
