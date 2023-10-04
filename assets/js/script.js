@@ -141,14 +141,14 @@ workoutSearchForm.addEventListener("submit", function (event) {
     });
 });
 
-// Get recipe exerciseQuery results based on user input
+// Get recipe query results based on user input
 recipeInputForm.addEventListener("submit", function (e) {
   e.preventDefault();
   e.stopPropagation();
   // below clears out any previously generated cards from previous searches
   recipeContainer.replaceChildren("");
   recipeQuery = e.target.firstElementChild.value;
-  // fetch url below will include the exerciseQuery input and return the nutrition info
+  // fetch url below will include the recipe query input and return the nutrition info
   // we can comment out the snack type and mostly get entrees
   const spoonacularUrl =
     "https://api.spoonacular.com/recipes/complexSearch?query=" +
