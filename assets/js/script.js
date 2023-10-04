@@ -1,4 +1,4 @@
-// Selectors
+//////////////////////// Selectors ////////////////////////
 const nameInput = document.getElementById("name");
 const weightInput = document.getElementById("weight");
 const nameWeightSubmit = document.getElementById("nameWeightSubmit");
@@ -6,26 +6,31 @@ const getNameForm = document.getElementById("nameWeightSubmit");
 const instructionDisplay = document.getElementById("instructions-container");
 const recipeInputForm = document.getElementById("recipeSearch");
 const recipeContainer = document.getElementById("recipe-container");
+const exerciseQueryInput = document.querySelector("#activity");
+const workoutName = document.getElementById("workout-name");
+const workoutSearchForm = document.getElementById("workout-search");
 
-// Empty Variables to use globally
-let currRecipe = "";
+///////Empty Variables for later use ////////////////////////
+let recipeQuery = "";
 let currWorkout = "";
 let recipeImage = "";
 let dataResults = "";
-
-// API Keys
+let recipeIdTag = ""; //not used yet
+let selectedRecipe = [];
+/////////////////// API Keys/Info////////////////////////
 const spoonacularKey = "5661b30edf15496e914efae71e0a25fc";
-
-// Image Cards
+const nutritionixAPIKey = "c2b54dca13476d2a351b2efab070d586";
+const nutritionixAPIID = "4f52c431";
+//////////////////////// Image Cards ////////////////////////
 const createCards =
-  '<div class="row">' +
+  '<div class="row ">' +
   // below adjusting both s and m will size the whole card
   '<div class="col s12 m3 l2 ">' +
-  '<div class="card small hoverable">' +
+  '<div class="card hoverable">' +
   '<div class="card-image">' +
   '<img class="insert-img" src="">' +
   '<span class="card-title">Card Title</span>' +
-  ' <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>' +
+  '<button class="btn-floating halfway-fab waves-effect waves-light red "><i class="material-icons add-recipe">add</i></button>' +
   "</div>" +
   '<div class="card-content">' +
   "<p>I am a very simple card. I am good at containing small bits of information.</p>" +
@@ -37,7 +42,6 @@ const createCards =
   "</div>" +
   "</div>";
 
-// Functions
 function storingNameWeight() {
   let nameValue = nameInput.value;
   let weightValue = weightInput.value;
@@ -45,8 +49,8 @@ function storingNameWeight() {
   localStorage.setItem("weight", weightValue);
 }
 
-// Rendering
-// Change Needed to IPDisplay
+///////////////////////// Rendering /////////////////////////
+// Change Needed to InstucPageDisplay
 function instructionPageDisplay() {
   instructionDisplay.classList.remove("invisible");
   instructionDisplay.classList.add("visible");
@@ -71,15 +75,32 @@ function renderRecipePictureCard(data) {
     const recipeImgEl = document.querySelectorAll(".insert-img");
     const moreInfoRecipeEl = document.querySelectorAll(".more-info");
     const cardTitleEl = document.querySelectorAll(".card-title");
+    const recipeBtns = document.querySelectorAll(".add-recipe");
     cardTitleEl[i].textContent = dataResults[i].title;
     recipeImgEl[i].setAttribute("src", recipeImage);
     moreInfoRecipeEl[i].textContent = "More Info";
     moreInfoRecipeEl[i].setAttribute("href", data.results[0].sourceUrl);
+    recipeBtns[i].setAttribute("data-recipe", i);
   }
+  const selectRecipeBtn = document.querySelectorAll(".add-recipe");
+
+  selectRecipeBtn.forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      console.log("clicked");
+      // reset selectedRecipe Array to clear out previous selection
+      selectedRecipe = [];
+      const getRecipeIndex = e.target.getAttribute("data-recipe");
+      console.log(getRecipeIndex);
+      selectedRecipe.push(dataResults[getRecipeIndex]);
+      const stringifyCR = JSON.stringify(selectedRecipe);
+      localStorage.setItem("Selected Recipe", stringifyCR);
+      console.log("btn", stringifyCR);
+    });
+  });
 }
 
-// Event Listeners
-// Render Name to Page
+//////////////////////// Event Listeners////////////////////////
 getNameForm.addEventListener("click", function (event) {
   event.stopPropagation();
   event.preventDefault();
@@ -88,31 +109,55 @@ getNameForm.addEventListener("click", function (event) {
   getGreeting();
 });
 
-// For Calories - Need New API Here? Nutritionix?
-document
-  .getElementById("activity-submit")
-  .addEventListener("click", function (event) {
-    event.stopPropagation();
-    event.preventDefault();
-  });
+// Nutrionix Exercise API Fetches exercise from user input
+workoutSearchForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const exerciseQuery = exerciseQueryInput.value;
+  const exerciseAPI = "https://trackapi.nutritionix.com/v2/natural/exercise";
 
-// Get query results based on user input for recipes
+  fetch(exerciseAPI, {
+    method: "POST",
+    headers: {
+      "x-app-id": nutritionixAPIID,
+      "x-app-key": nutritionixAPIKey,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: exerciseQuery,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("!!!");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      workoutName.textContent = data.name;
+    })
+    .catch((error) => {
+      console.log("Response Error", error);
+    });
+});
+
+// Get recipe exerciseQuery results based on user input
 recipeInputForm.addEventListener("submit", function (e) {
   e.preventDefault();
   e.stopPropagation();
   // below clears out any previously generated cards from previous searches
   recipeContainer.replaceChildren("");
-  currRecipe = e.target.firstElementChild.value;
-  // fetch url below will include the query input, only provide recipes with the meal type "snack", and return the nutrition info
+  recipeQuery = e.target.firstElementChild.value;
+  // fetch url below will include the exerciseQuery input and return the nutrition info
   // we can comment out the snack type and mostly get entrees
   const spoonacularUrl =
     "https://api.spoonacular.com/recipes/complexSearch?query=" +
-    currRecipe +
+    recipeQuery +
     // "&type=snack" +
     "&addRecipeNutrition=true" +
     "&apiKey=" +
     spoonacularKey;
-  console.log(currRecipe, "current");
+  console.log(recipeQuery, "current");
   fetch(spoonacularUrl, {
     method: "GET",
     headers: {
@@ -121,25 +166,14 @@ recipeInputForm.addEventListener("submit", function (e) {
   })
     .then(function (response) {
       console.log(response);
-      // response.json();
       return response.json();
     })
     .then(function (data) {
       console.log(data, "in fetch");
       dataResults = data.results;
       renderRecipePictureCard(data);
-      // currRecipe = data.reusults;
     })
     .catch(function (error) {
       console.log(error);
     });
-});
-
-// store name and weight to localStorage
-nameWeightSubmit.addEventListener("click", function (event) {
-  event.stopPropagation();
-  var nameValue = nameInput.value;
-  var weightValue = weightInput.value;
-  localStorage.setItem("name", nameValue);
-  localStorage.setItem("weight", weightValue);
 });
