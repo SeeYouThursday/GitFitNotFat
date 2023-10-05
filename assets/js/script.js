@@ -10,6 +10,10 @@ const exerciseQueryInput = document.querySelector("#activity");
 const workoutName = document.getElementById("workout-name");
 const workoutSearchForm = document.getElementById("workout-search");
 
+const workoutDuration = document.getElementById("workout-duration");
+const caloriesBurnedDisplay = document.getElementById("calories-burned");
+let caloriesBurned = "";
+let workoutDurationValue = "";
 ///////Empty Variables for later use ////////////////////////
 let recipeQuery = "";
 let currWorkout = "";
@@ -100,6 +104,25 @@ function renderRecipePictureCard(data) {
   });
 }
 
+function durationToBurnCalories() {
+  console.log(caloriesBurned); //in 30 min
+  console.log(workoutDurationValue);
+  const getRecipe = localStorage.getItem("Selected Recipe");
+  const parseRecipe = JSON.parse(getRecipe);
+  console.log(parseRecipe);
+  recipeCalories = parseRecipe[0].nutrition.nutrients[0].amount;
+  const durationMinutes = Math.ceil(
+    (recipeCalories / caloriesBurned) * workoutDurationValue
+  );
+  console.log(durationMinutes);
+  workoutDuration.textContent = `Duration:${durationMinutes} Minutes`;
+  const caloriesBurnedCalculation = (durationMinutes / 30) * caloriesBurned;
+  console.log(caloriesBurnedCalculation);
+  caloriesBurnedDisplay.textContent =
+    "Calories Burned: " + caloriesBurnedCalculation;
+  return durationMinutes;
+}
+
 //////////////////////// Event Listeners////////////////////////
 getNameForm.addEventListener("click", function (event) {
   event.stopPropagation();
@@ -112,7 +135,7 @@ getNameForm.addEventListener("click", function (event) {
 // Nutrionix Exercise API Fetches exercise from user input
 workoutSearchForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  const exerciseQuery = exerciseQueryInput.value;
+  const exerciseQuery = exerciseQueryInput.value.trim();
   const exerciseAPI = "https://trackapi.nutritionix.com/v2/natural/exercise";
 
   fetch(exerciseAPI, {
@@ -134,7 +157,11 @@ workoutSearchForm.addEventListener("submit", function (event) {
     })
     .then((data) => {
       console.log(data);
-      workoutName.textContent = data.name;
+      workoutName.textContent = `${data.exercises[0].user_input}`;
+      caloriesBurned = data.exercises[0].nf_calories;
+      workoutDurationValue = data.exercises[0].duration_min;
+      durationToBurnCalories(caloriesBurned);
+      // below is incorrect!
     })
     .catch((error) => {
       console.log("Response Error", error);
