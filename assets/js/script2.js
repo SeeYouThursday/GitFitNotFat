@@ -4,8 +4,12 @@ const exerciseAPI = "https://trackapi.nutritionix.com/v2/natural/exercise";
 const exerciseQueryInput = document.querySelector(
   '#workout-container input[type="text"]'
 );
-const workoutName = document.getElementById("workout-name");
 const workoutSearchForm = document.getElementById("workout-search");
+const workoutName = document.getElementById("workout-name");
+const workoutDuration = document.getElementById("workout-duration");
+const caloriesBurnedDisplay = document.getElementById("calories-burned");
+let caloriesBurned = "";
+let workoutDurationValue = "";
 
 workoutSearchForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -24,16 +28,24 @@ workoutSearchForm.addEventListener("submit", function (event) {
     }),
   })
     .then((response) => {
-      if (!response.ok) {
-        throw new Error("!!!");
-      }
       return response.json();
     })
     .then((data) => {
       console.log(data);
-      workoutName.textContent = data.name;
-    })
-    .catch((error) => {
-      console.error("???", error);
+      workoutName.textContent = `${data.exercises[0].user_input}`;
+      caloriesBurned = data.exercises[0].nf_calories;
+      workoutDurationValue = data.exercises[0].duration_min;
+      durationToBurnCalories(caloriesBurned);
+      caloriesBurnedDisplay.textContent = `Calories Burned: ${data.exercises[0].nf_calories}`;
     });
 });
+
+function durationToBurnCalories() {
+  console.log(caloriesBurned);
+  console.log(workoutDuration.value);
+  const durationMinutes =
+    (recipeCalories / caloriesBurned) * workoutDurationValue;
+  console.log(durationMinutes);
+  workoutDuration.textContent = `Duration:${durationMinutes} Minutes`;
+  return durationMinutes;
+}
