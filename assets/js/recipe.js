@@ -31,6 +31,23 @@ const createCards =
   "</div>" +
   "</div>";
 
+function clearRecipeCards() {
+  recipeContainer.replaceChildren("");
+}
+
+function renderRecipeSelection(data) {
+  clearRecipeCards();
+  recipeContainer.insertAdjacentHTML("beforeend", createCards);
+  const recipeImgEl = document.querySelector(".insert-img");
+  const moreInfoRecipeEl = document.querySelector(".more-info");
+  const cardTitleEl = document.querySelector(".card-title");
+  const recipeBtns = document.querySelector(".add-recipe");
+  recipeImage = selectedRecipe[0].image;
+  cardTitleEl.textContent = selectedRecipe[0].title;
+  recipeImgEl.setAttribute("src", recipeImage);
+  moreInfoRecipeEl.textContent = "More Info";
+  moreInfoRecipeEl.setAttribute("href", selectedRecipe[0].sourceUrl);
+}
 function renderRecipePictureCard(data) {
   // below function is to make sure that Materialize will apply its style to the newly created elements in the 'for' loop
   M.AutoInit();
@@ -61,6 +78,7 @@ function renderRecipePictureCard(data) {
       const stringifyCR = JSON.stringify(selectedRecipe);
       localStorage.setItem("Selected Recipe", stringifyCR);
       console.log("btn", stringifyCR);
+      renderRecipeSelection(data);
     });
   });
 }
@@ -71,7 +89,8 @@ recipeInputForm.addEventListener("submit", function (e) {
   e.preventDefault();
   e.stopPropagation();
   // below clears out any previously generated cards from previous searches
-  recipeContainer.replaceChildren("");
+
+  clearRecipeCards();
   recipeQuery = e.target.firstElementChild.value;
   // fetch url below will include the recipe query input and return the nutrition info
   // we can comment out the snack type and mostly get entrees
