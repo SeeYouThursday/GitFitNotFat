@@ -21,8 +21,8 @@ function storingNameWeight() {
 function getGreeting() {
   const greetingEl = instructionDisplay.firstElementChild;
   console.log(greetingEl);
-  const setGreetingText = (greetingEl.textContent =
-    "Hello, " + localStorage.getItem("name") + "!");
+  greetingEl.textContent =
+    "Hello, " + localStorage.getItem("name") + "!";
 }
 // This renders the recipe card to the page
 
