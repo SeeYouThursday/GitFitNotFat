@@ -19,7 +19,7 @@ function storingNameWeight() {
 
 // This function will render the user's name at the top
 function getGreeting() {
-  const greetingEl = instructionDisplay.firstElementChild;
+  const greetingEl = document.getElementById("nameGreeting")
   console.log(greetingEl);
   greetingEl.textContent =
     "Hello, " + localStorage.getItem("name") + "!";
