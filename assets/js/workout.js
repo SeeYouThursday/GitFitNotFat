@@ -2,19 +2,20 @@
 const exerciseQueryInput = document.querySelector("#activity");
 const workoutName = document.getElementById("workout-name");
 const workoutSearchForm = document.getElementById("workout-search");
-
 const workoutDuration = document.getElementById("workout-duration");
 const caloriesBurnedDisplay = document.getElementById("calories-burned");
-
+const workoutOutputContainer = document.getElementById(
+  "workout-output-container"
+);
 ///////Empty Variables for later use ////////////////////////
 let caloriesBurned = "";
 let workoutDurationValue = "";
+// let workoutImg = "";
 
-/////////////////// API Keys/Info////////////////////////
+// API Key Information
 const nutritionixAPIKey = "c2b54dca13476d2a351b2efab070d586";
 const nutritionixAPIID = "4f52c431";
-///////////////////////// Rendering /////////////////////////
-
+//////////////////////// Rendering ////////////////////////
 function durationToBurnCalories() {
   console.log(caloriesBurned); //in 30 min
   console.log(workoutDurationValue);
@@ -26,15 +27,19 @@ function durationToBurnCalories() {
     (recipeCalories / caloriesBurned) * workoutDurationValue
   );
   console.log(durationMinutes);
-  workoutDuration.textContent = `Duration:${durationMinutes} Minutes`;
+  workoutDuration.textContent = `Duration: ${durationMinutes} Minutes`;
   const caloriesBurnedCalculation = (durationMinutes / 30) * caloriesBurned;
   console.log(caloriesBurnedCalculation);
   caloriesBurnedDisplay.textContent =
-    "Calories Burned: " + caloriesBurnedCalculation;
+    "Calories Burned: " + caloriesBurnedCalculation + " calories";
   return durationMinutes;
 }
 
-//////////////////////// Event Listeners////////////////////////
+// function renderWorkoutPhoto(data) {
+//   workoutOutputContainer.insertAdjacentHTML("beforeend", createCards);
+//   document.getElementById("workout-img").setAttribute("src", workoutImg);
+// }
+//////////////////////// Event Listener ////////////////////////
 // Nutrionix Exercise API Fetches exercise from user input
 workoutSearchForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -63,8 +68,9 @@ workoutSearchForm.addEventListener("submit", function (event) {
       workoutName.textContent = `${data.exercises[0].user_input}`;
       caloriesBurned = data.exercises[0].nf_calories;
       workoutDurationValue = data.exercises[0].duration_min;
+      workoutImg = data.exercises[0].photo.thumb;
       durationToBurnCalories(caloriesBurned);
-      // below is incorrect!
+      //   renderWorkoutPhoto(data);
     })
     .catch((error) => {
       console.log("Response Error", error);

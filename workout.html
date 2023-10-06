@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>PG Workout Selection</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
@@ -31,34 +31,16 @@
           type="text"
           placeholder="Search Your Workout Here!"
         />
-        <button id="activity-submit" type="submit"></button>
+        <button id="activity-submit" type="submit">Submit!</button>
       </form>
-      <footer>
-        <div class="footer-copyright #e0f2f1 teal lighten-5">
-          <div class="container">
-            © 2014 Copyright Text
-            <a class="212121 grey-text text-darken-4 right" href="#!">Links</a>
-          </div>
-        </div>
-      </footer>
     </div>
     <hr />
     <div id="workout-output-container">
-      <nav>
-        <div class="nav-wrapper #e0f2f1 teal lighten-4">
-          <a
-            href="./index.html"
-            class="brand-logo center 212121 grey-text text-darken-4"
-            >GitFitNotFat</a
-          >
-          <ul id="nav-mobile" class="left hide-on-med-and-down"></ul>
-        </div>
-      </nav>
-      <img src="" alt="Nate's Workout Demo" />
+      <!-- <img src="" alt="Nate's Workout Demo" /> -->
       <h2 id="workout-name">Workout That Nate Will Demo</h2>
       <ul>
-        <li>Duration</li>
-        <li>Calories - Math Done Here</li>
+        <li id="workout-duration">Duration</li>
+        <li id="calories-burned">Calories - Math Done Here</li>
       </ul>
       <button id="reset" type="reset">Reset</button>
       <footer>
@@ -71,7 +53,6 @@
       </footer>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <script src="./assets/js/script.js"></script>
+    <script src="./Assets/js/workout.js"></script>
   </body>
 </html>
