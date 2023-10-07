@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Results!</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/recipe.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper #e0f2f1 teal lighten-4">
+          <a
+            href="./index.html"
+            class="brand-logo center 212121 grey-text text-darken-4"
+            >GitFitNotFat</a
+          >
+          <ul id="nav-mobile" class="left hide-on-med-and-down"></ul>
+        </div>
+      </nav>
+    </header>
+    <main class="hero-image">
+      <!-- Search Div -->
+      <div class="hero-text text-block">
+        <div class="recipeInput flex">
+          <form id="recipeSearch">
+            <label id="search-label" for="search-recipe"
+              ><h2>Recipe Search</h2>
+              <span id="shrink-label" class="hide">Recipe Search</span></label
+            >
+            <input
+              type="text"
+              name="recipe"
+              id="search-recipe"
+              placeholder="Search a Recipe Here!"
+            />
+          </form>
+        </div>
+      </div>
+
+      <div class="">
+        <!-- Results Div Where all of the results populate -->
+        <div id="recipe-container" class="row"></div>
+        <!-- nutrients  -->
+        <div id="results-container" class="hide flex">
+          <div id="nutrients-container" class="">
+            <img src="" alt="" />
+            <div class="row">
+              <div class="col s12 m6">
+                <h6 class="card-title amber-text text-darken-4 amber lighten-5">
+                  Card Title
+                </h6>
+                <div class="card-panel teal">
+                  <h6 class="center-align">nutrients</h6>
+                  <ul>
+                    <li id="servings">Servings:</li>
+                    <li class="underline">Per serving:</li>
+                    <li id="calories">Calories:</li>
+                    <li id="carbs">Carbs:</li>
+                    <li id="fat">Fat:</li>
+                    <li id="protein">Protein:</li>
+                  </ul>
+                  <span class="white-text" id="recipe-summary"
+                    >I am a very simple card. I am good at containing small bits
+                    of information. I am convenient because I require little
+                    markup to use effectively. I am similar to what is called a
+                    panel in other frameworks.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="navigationBtns" class="container hide">
+        <button type="button" id="goBack" class="btn">Go back!</button>
+        <a id="confirm-recipe" class="btn" href="./workout.html">Confirm!</a>
+      </div>
+
+      <!-- Single Recipe Div - where your selection populates -->
+    </main>
+    <footer>
+      <div class="footer-copyright #e0f2f1 teal lighten-5">
+        <div class="container">
+          <a class="212121 grey-text text-darken-4 right" href="#!">Links</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/js/recipeResults.js"></script>
+  </body>
+</html>

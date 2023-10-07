@@ -1,6 +1,8 @@
 //////////////////////// Selectors ////////////////////////
 const recipeInputForm = document.getElementById("recipeSearch");
 const recipeContainer = document.getElementById("recipe-container");
+const goBackBtn = document.getElementById("goBack");
+const confirmRecipeBtn = document.getElementById("confirm-recipe");
 
 ///////Empty Variables for later use ////////////////////////
 let dataResults = "";
@@ -12,21 +14,19 @@ const spoonacularKey = "5661b30edf15496e914efae71e0a25fc";
 //////////////////////// Rendering ////////////////////////
 
 const createCards =
-  '<div class="row ">' +
   // below adjusting both s and m will size the whole card
-  '<div class="col s12 m3 l2 ">' +
+  '<div class="col s12 m6 l3">' +
   '<div class="card hoverable">' +
   '<div class="card-image">' +
-  '<img class="insert-img" src="">' +
-  '<span class="card-title">Card Title</span>' +
-  '<button class="btn-floating halfway-fab waves-effect waves-light red "><i class="material-icons add-recipe">add</i></button>' +
+  '<img class="insert-img responsive-img" src="" alt="">' +
+  '<h6 class="card-title amber-text text-darken-4 amber lighten-5">Card Title</h6>' +
+  '<button class="btn-floating halfway-fab waves-effect waves-light red after-selection"><i class="material-icons add-recipe">add</i></button>' +
   "</div>" +
   '<div class="card-content">' +
-  "<p>I am a very simple card. I am good at containing small bits of information.</p>" +
+  '<p class="caloriesPerServing">I am a very simple card. </p>' +
   "</div>" +
   '<div class="card-action">' +
   '<a href="#"  class="more-info">This is a link</a>' +
-  "</div>" +
   "</div>" +
   "</div>" +
   "</div>";
@@ -41,13 +41,41 @@ function renderRecipeSelection(data) {
   const recipeImgEl = document.querySelector(".insert-img");
   const moreInfoRecipeEl = document.querySelector(".more-info");
   const cardTitleEl = document.querySelector(".card-title");
-  const recipeBtns = document.querySelector(".add-recipe");
+  const removeRecipeBtn = document.querySelector(".after-selection");
+  removeRecipeBtn.remove();
+  // removes the red btn from the image // might not need if rerendered into horizontal card
   recipeImage = selectedRecipe[0].image;
   cardTitleEl.textContent = selectedRecipe[0].title;
   recipeImgEl.setAttribute("src", recipeImage);
   moreInfoRecipeEl.textContent = "More Info";
   moreInfoRecipeEl.setAttribute("href", selectedRecipe[0].sourceUrl);
 }
+// Left off here 1009pm 10.5
+function renderSelectRecipeInstructions(data) {
+  // once selection is made via the EvLi in RRPCard,
+  // add confirm button and go back btn
+  const resultsContainer = document.getElementById("results-container");
+  const navigationBtns = document.getElementById("navigationBtns");
+  navigationBtns.classList.remove("hide");
+  resultsContainer.classList.remove("hide");
+  // if confirm, move to the workout page,
+  // if go back, call rRRPCards
+}
+
+function renderSelectionNutrients(data) {
+  const servings = document.getElementById("servings");
+  const calories = document.getElementById("calories");
+  const carbs = document.getElementById("carbs");
+  const protein = document.getElementById("protein");
+  const fat = document.getElementById("fat");
+  const nutritents = selectedRecipe[0].nutrition.nutrients;
+  servings.textContent = "Servings: " + selectedRecipe[0].servings;
+  calories.textContent = "Calories: " + nutritents[0].amount;
+  carbs.textContent = "Carbs: " + nutritents[3].amount;
+  protein.textContent = "Protein: " + nutritents[8].amount;
+  fat.textContent = "Fat: " + nutritents[1].amount;
+}
+
 function renderRecipePictureCard(data) {
   // below function is to make sure that Materialize will apply its style to the newly created elements in the 'for' loop
   M.AutoInit();
@@ -58,11 +86,18 @@ function renderRecipePictureCard(data) {
     const moreInfoRecipeEl = document.querySelectorAll(".more-info");
     const cardTitleEl = document.querySelectorAll(".card-title");
     const recipeBtns = document.querySelectorAll(".add-recipe");
-    cardTitleEl[i].textContent = dataResults[i].title;
+    const caloriePreview = document.querySelectorAll(".caloriesPerServing");
+    // const recipeSummary = document.querySelectorAll(".recipe-summary");
+    const recipeTitle = dataResults[i].title;
+    cardTitleEl[i].textContent = recipeTitle;
     recipeImgEl[i].setAttribute("src", recipeImage);
-    moreInfoRecipeEl[i].textContent = "More Info";
+    recipeImgEl[i].setAttribute("alt", recipeTitle);
+    moreInfoRecipeEl[i].textContent = "Recipe Link";
     moreInfoRecipeEl[i].setAttribute("href", data.results[0].sourceUrl);
     recipeBtns[i].setAttribute("data-recipe", i);
+    caloriePreview[i].textContent =
+      "Calories per Serving: " + dataResults[i].nutrition.nutrients[0].amount;
+    // recipeSummary[i].innerHTML = dataResults[i].summary;
   }
   const selectRecipeBtn = document.querySelectorAll(".add-recipe");
 
@@ -79,8 +114,24 @@ function renderRecipePictureCard(data) {
       localStorage.setItem("Selected Recipe", stringifyCR);
       console.log("btn", stringifyCR);
       renderRecipeSelection(data);
+      renderSelectRecipeInstructions(data);
+      renderSelectionNutrients(data);
     });
   });
+}
+
+function goBackEvent(data) {
+  goBackBtn.addEventListener("click", function () {
+    clearRecipeCards();
+    renderRecipePictureCard(data);
+  });
+}
+
+function hideHeros() {
+  const heroImage = document.querySelector("main");
+  const heroText = document.querySelector(".hero-text");
+  heroImage.setAttribute("class", "");
+  heroText.classList.remove("hero-text", "text-block");
 }
 
 //////////////////////// Event Listener ////////////////////////
@@ -88,10 +139,11 @@ function renderRecipePictureCard(data) {
 recipeInputForm.addEventListener("submit", function (e) {
   e.preventDefault();
   e.stopPropagation();
-  // below clears out any previously generated cards from previous searches
 
+  // below clears out any previously generated cards from previous searches
   clearRecipeCards();
-  recipeQuery = e.target.firstElementChild.value;
+
+  recipeQuery = e.target.lastElementChild.value;
   // fetch url below will include the recipe query input and return the nutrition info
   // we can comment out the snack type and mostly get entrees
   const spoonacularUrl =
@@ -115,7 +167,11 @@ recipeInputForm.addEventListener("submit", function (e) {
     .then(function (data) {
       console.log(data, "in fetch");
       dataResults = data.results;
+      hideHeros();
       renderRecipePictureCard(data);
+      // showCarousel();
+      goBackEvent(data);
+      return data;
     })
     .catch(function (error) {
       console.log(error);
