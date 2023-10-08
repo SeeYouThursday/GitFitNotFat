@@ -3,6 +3,9 @@ const recipeInputForm = document.getElementById("recipeSearch");
 const recipeContainer = document.getElementById("recipe-container");
 const goBackBtn = document.getElementById("goBack");
 const confirmRecipeBtn = document.getElementById("confirm-recipe");
+const resultsContainer = document.getElementById("results-container");
+const nutrientsContainer = document.getElementById("nutrients-container");
+const navigationBtns = document.getElementById("navigationBtns");
 
 ///////Empty Variables for later use ////////////////////////
 let dataResults = "";
@@ -15,18 +18,18 @@ const spoonacularKey = "5661b30edf15496e914efae71e0a25fc";
 
 const createCards =
   // below adjusting both s and m will size the whole card
-  '<div class="col s12 m6 l3">' +
-  '<div class="card hoverable flex">' +
+  '<div class="col s12 m3 flex change-size">' +
+  '<div class="card hoverable flex-column">' +
   '<div class="card-image">' +
   '<img class="insert-img responsive-img" src="" alt="">' +
   '<h6 class="card-title amber-text text-darken-4 amber lighten-5">Card Title</h6>' +
-  '<button class="btn-floating halfway-fab waves-effect waves-light red after-selection"><i class="material-icons add-recipe">add</i></button>' +
+  '<button class="btn waves-effect waves-light red after-selection"><i class="material-icons add-recipe">add</i></button>' +
   "</div>" +
   '<div class="card-content">' +
-  '<p class="caloriesPerServing">I am a very simple card. </p>' +
+  '<p class="caloriesPerServing"></p>' +
   "</div>" +
   '<div class="card-action">' +
-  '<a href="#"  class="more-info">This is a link</a>' +
+  '<a href="#" target="_blank" class="more-info">This is a link</a>' +
   "</div>" +
   "</div>" +
   "</div>";
@@ -35,27 +38,34 @@ function clearRecipeCards() {
   recipeContainer.replaceChildren("");
 }
 
+// Selection Rendering
 function renderRecipeSelection(data) {
   clearRecipeCards();
-  recipeContainer.insertAdjacentHTML("beforeend", createCards);
+
+  nutrientsContainer.insertAdjacentHTML("afterbegin", createCards);
+  const changeCardSize = document.querySelector(".change-size");
   const recipeImgEl = document.querySelector(".insert-img");
+  const recipeSummary = document.querySelector("#recipe-summary");
   const moreInfoRecipeEl = document.querySelector(".more-info");
   const cardTitleEl = document.querySelector(".card-title");
   const removeRecipeBtn = document.querySelector(".after-selection");
   removeRecipeBtn.remove();
   // removes the red btn from the image // might not need if rerendered into horizontal card
+  changeCardSize.setAttribute("id", "removal");
+  changeCardSize.classList.remove("m3");
+  changeCardSize.classList.add("m6");
   recipeImage = selectedRecipe[0].image;
   cardTitleEl.textContent = selectedRecipe[0].title;
   recipeImgEl.setAttribute("src", recipeImage);
-  moreInfoRecipeEl.textContent = "More Info";
+  moreInfoRecipeEl.textContent = "Recipe Link";
   moreInfoRecipeEl.setAttribute("href", selectedRecipe[0].sourceUrl);
+  recipeSummary.innerHTML = selectedRecipe[0].summary;
 }
 // Left off here 1009pm 10.5
-function renderSelectRecipeInstructions(data) {
+function showNavigationBtns() {
   // once selection is made via the EvLi in RRPCard,
   // add confirm button and go back btn
-  const resultsContainer = document.getElementById("results-container");
-  const navigationBtns = document.getElementById("navigationBtns");
+
   navigationBtns.classList.remove("hide");
   resultsContainer.classList.remove("hide");
   // if confirm, move to the workout page,
@@ -75,8 +85,8 @@ function renderSelectionNutrients(data) {
   protein.textContent = "Protein: " + nutritents[8].amount;
   fat.textContent = "Fat: " + nutritents[1].amount;
 }
-
-function renderRecipePictureCard(data) {
+// Multiple Results Below
+function renderRecipePictureCards(data) {
   // below function is to make sure that Materialize will apply its style to the newly created elements in the 'for' loop
   M.AutoInit();
   for (var i = 0; i < dataResults.length; i++) {
@@ -114,7 +124,7 @@ function renderRecipePictureCard(data) {
       localStorage.setItem("Selected Recipe", stringifyCR);
       console.log("btn", stringifyCR);
       renderRecipeSelection(data);
-      renderSelectRecipeInstructions(data);
+      showNavigationBtns();
       renderSelectionNutrients(data);
     });
   });
@@ -122,15 +132,19 @@ function renderRecipePictureCard(data) {
 
 function goBackEvent(data) {
   goBackBtn.addEventListener("click", function () {
-    clearRecipeCards();
-    renderRecipePictureCard(data);
+    resultsContainer.classList.add("hide");
+    const removal = document.getElementById("removal");
+    nutrientsContainer.removeChild(removal);
+    renderRecipePictureCards(data);
+    navigationBtns.classList.add("hide");
   });
 }
 
+// Changes out hero Images
 function hideHeros() {
   const heroImage = document.querySelector("main");
-  const heroText = document.querySelector(".hero-text");
-  heroImage.classList.remove("hero-image")
+  const heroText = document.querySelector("#recipeSearchBox");
+  heroImage.classList.remove("hero-image");
   heroImage.setAttribute("class", "hero-results");
   heroText.classList.remove("hero-text", "text-block");
 }
@@ -169,7 +183,7 @@ recipeInputForm.addEventListener("submit", function (e) {
       console.log(data, "in fetch");
       dataResults = data.results;
       hideHeros();
-      renderRecipePictureCard(data);
+      renderRecipePictureCards(data);
       // showCarousel();
       goBackEvent(data);
       return data;
