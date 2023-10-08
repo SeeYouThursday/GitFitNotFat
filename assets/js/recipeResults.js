@@ -6,6 +6,8 @@ const confirmRecipeBtn = document.getElementById("confirm-recipe");
 const resultsContainer = document.getElementById("results-container");
 const nutrientsContainer = document.getElementById("nutrients-container");
 const navigationBtns = document.getElementById("navigationBtns");
+const recipeSummary = document.querySelector("#recipe-summary");
+const removal = document.getElementById("removal");
 
 ///////Empty Variables for later use ////////////////////////
 let dataResults = "";
@@ -39,13 +41,13 @@ function clearRecipeCards() {
 }
 
 // Selection Rendering
+
 function renderRecipeSelection(data) {
   clearRecipeCards();
 
   nutrientsContainer.insertAdjacentHTML("afterbegin", createCards);
   const changeCardSize = document.querySelector(".change-size");
   const recipeImgEl = document.querySelector(".insert-img");
-  const recipeSummary = document.querySelector("#recipe-summary");
   const moreInfoRecipeEl = document.querySelector(".more-info");
   const cardTitleEl = document.querySelector(".card-title");
   const removeRecipeBtn = document.querySelector(".after-selection");
@@ -65,7 +67,6 @@ function renderRecipeSelection(data) {
 function showNavigationBtns() {
   // once selection is made via the EvLi in RRPCard,
   // add confirm button and go back btn
-
   navigationBtns.classList.remove("hide");
   resultsContainer.classList.remove("hide");
   // if confirm, move to the workout page,
@@ -133,13 +134,19 @@ function renderRecipePictureCards(data) {
 function goBackEvent(data) {
   goBackBtn.addEventListener("click", function () {
     resultsContainer.classList.add("hide");
-    const removal = document.getElementById("removal");
-    nutrientsContainer.removeChild(removal);
-    renderRecipePictureCards(data);
+    removeSelectionCard();
     navigationBtns.classList.add("hide");
+    renderRecipePictureCards(data);
   });
 }
 
+function removeSelectionCard() {
+  if (removal !== null && removal !== undefined) {
+    removal.remove();
+  } else {
+    return;
+  }
+}
 // Changes out hero Images
 function hideHeros() {
   const heroImage = document.querySelector("main");
@@ -156,6 +163,15 @@ recipeInputForm.addEventListener("submit", function (e) {
   e.stopPropagation();
 
   // below clears out any previously generated cards from previous searches
+  if (removal !== null) {
+    removeSelectionCard();
+  }
+  // try {
+  //   removeSelectionCard();
+  // } catch (error) {
+  //   console.error(error);
+  // }
+
   clearRecipeCards();
 
   recipeQuery = e.target.lastElementChild.value;
