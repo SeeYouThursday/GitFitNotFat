@@ -16,7 +16,7 @@ const spoonacularKey = "5661b30edf15496e914efae71e0a25fc";
 const createCards =
   // below adjusting both s and m will size the whole card
   '<div class="col s12 m6 l3">' +
-  '<div class="card hoverable">' +
+  '<div class="card hoverable flex">' +
   '<div class="card-image">' +
   '<img class="insert-img responsive-img" src="" alt="">' +
   '<h6 class="card-title amber-text text-darken-4 amber lighten-5">Card Title</h6>' +
