@@ -130,7 +130,8 @@ function goBackEvent(data) {
 function hideHeros() {
   const heroImage = document.querySelector("main");
   const heroText = document.querySelector(".hero-text");
-  heroImage.setAttribute("class", "");
+  heroImage.classList.remove("hero-image")
+  heroImage.setAttribute("class", "hero-results");
   heroText.classList.remove("hero-text", "text-block");
 }
 
