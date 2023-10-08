@@ -2,6 +2,22 @@ body, html {
     height: 100%;
 }
 
+body {
+    /* background-color: aqua; */
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  
+  main {
+    flex: 1 0 auto;
+  }
+
+  ::placeholder {
+    color: rgb(14, 13, 13);
+    opacity: 1; /* Firefox */
+  }
+
 /* The hero image */
 .hero-image {
     /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
@@ -14,4 +30,9 @@ body, html {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+}
+
+.introBox {
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(195, 185, 172, 0.7);
 }
