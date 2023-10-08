@@ -69,43 +69,39 @@
         </div>
       </div>
 
-      <div>
-        <!-- Results Div Where all of the results populate -->
-        <div id="recipe-container" class="row"></div>
-        <!-- nutrients  -->
-        <div id="results-container" class="hide flex">
-          <div id="nutrients-container" class="">
-            <img src="" alt="" />
-            <div class="row">
-              <div class="col s12 m6">
-                <h6 class="card-title amber-text text-darken-4 amber lighten-5">
-                  Card Title
-                </h6>
-                <div class="card-panel teal">
-                  <h6 class="center-align">nutrients</h6>
-                  <ul>
-                    <li id="servings">Servings:</li>
-                    <li class="underline">Per serving:</li>
-                    <li id="calories">Calories:</li>
-                    <li id="carbs">Carbs:</li>
-                    <li id="fat">Fat:</li>
-                    <li id="protein">Protein:</li>
-                  </ul>
-                  <span class="white-text" id="recipe-summary"
-                    >I am a very simple card. I am good at containing small bits
-                    of information. I am convenient because I require little
-                    markup to use effectively. I am similar to what is called a
-                    panel in other frameworks.
-                  </span>
-                </div>
-              </div>
+      <!-- Results Div Where all of the results populate -->
+      <div id="recipe-container" class="row container"></div>
+      <!-- nutrients  -->
+      <div id="results-container" class="hide flex container">
+        <div id="nutrients-container" class="row">
+          <!-- <img src="" alt="" /> -->
+          <!-- <div class="row"> -->
+          <div class="col s12 m6">
+            <div class="card-panel white">
+              <h6 class="center-align">Nutrients</h6>
+              <ul>
+                <li id="servings">Servings:</li>
+                <li class="underline">Per serving:</li>
+                <li id="calories">Calories:</li>
+                <li id="carbs">Carbs:</li>
+                <li id="fat">Fat:</li>
+                <li id="protein">Protein:</li>
+              </ul>
+              <span class="teal-text" id="recipe-summary"> </span>
             </div>
           </div>
+          <!-- </div> -->
         </div>
       </div>
-      <div id="navigationBtns" class="container hide flex">
-        <button type="button" id="goBack" class="btn">Go back!</button>
-        <a id="confirm-recipe" class="btn" href="./workout.html">Confirm!</a>
+
+      <div id="navigationBtns" class="container flex-space-between hide">
+        <a id="goBack" class="waves-effect waves-light btn-large"> Go back! </a>
+        <a
+          id="confirm-recipe"
+          class="waves-effect waves-light btn-large"
+          href="./workout.html"
+          ><i class="tiny material-icons right"> check </i>Confirm!
+        </a>
       </div>
 
       <!-- Single Recipe Div - where your selection populates -->
@@ -113,7 +109,7 @@
     <footer>
       <!-- Photo by <a href="https://unsplash.com/@goumbik?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Lukas Blazek</a> on <a href="https://unsplash.com/photos/f-TWhXOrLiU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
    -->
-   <!-- Photo by <a href="https://unsplash.com/@brianwangenheim?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Brian Wangenheim</a> on <a href="https://unsplash.com/photos/kHopgHd6q-M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+      <!-- Photo by <a href="https://unsplash.com/@brianwangenheim?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Brian Wangenheim</a> on <a href="https://unsplash.com/photos/kHopgHd6q-M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
    -->
       <div class="footer-copyright #e0f2f1 teal lighten-5">
         <div class="container">

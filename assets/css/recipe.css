@@ -13,14 +13,25 @@ html {
 
 .flex {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
 
+.flex-space-between {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
 div div p {
   font-size: 15px;
+  padding: 0px;
+  margin: 0;
 }
 
 body {
@@ -65,12 +76,12 @@ div .card .card-image .card-title {
 
   background-image: url("../images/RecipeBackgrounds/4C88E8CB-28C1-495C-B4BC-DC92250090B7.jpeg");
   /* Set a specific height */
-  height: 170%;
+  /* height: 170%; this messes with the cards fitting*/
 
   /* Position and center the image to scale nicely on all screens */
   background-position: center;
-  background-repeat: no-repeat;
-  background-size:cover;
+  background-repeat: repeat;
+  background-size: cover;
   position: relative;
 }
 /* Place text in the middle of the image */
@@ -101,6 +112,7 @@ div .card .card-image .card-title {
   border-radius: 5px; /* Black background with 0.5 opacity */
   /* background-color: black; */
   padding: 5px;
+  font-size: small;
 }
 
 h2 {
