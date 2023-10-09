@@ -137,6 +137,7 @@ function clearRecipeCards() {
     console.log("clearcards");
   } else return;
 }
+
 function removeSelectionCard() {
   const removal = document.querySelectorAll(".removal");
   if (removal.length !== 0) {
@@ -162,27 +163,20 @@ function hideHeros() {
 
 // //////////////////////// Error Modals ////////////////////////
 
-function recipeModalError() {}
-
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elems, {
     dismissible: true,
   });
 });
+
 //////////////////////// Event Listener ////////////////////////
 // Get recipe query results based on user input
 recipeInputForm.addEventListener("submit", function (e) {
   e.preventDefault();
   e.stopPropagation();
 
-  // if (recipeQuery === "") {
-  //   // Show the modal
-  //   const modalEmptySubmit = document.getElementById("modal1");
-  //   var modalInstance = M.Modal.getInstance(modalEmptySubmit);
-  //   modalInstance.open();
-  //   return;
-  // }
+
   // below clears out any previously generated cards from previous searches
   clearRecipeCards();
   removeSelectionCard();
@@ -193,8 +187,14 @@ recipeInputForm.addEventListener("submit", function (e) {
   }
 
   recipeQuery = document.querySelector("input").value;
-  //TODO VALIADATION ON EMPTY VALUE, NO RESULTS FOUND, NO SPECIAL CHARACTERS
-
+  // Form Validation - making sure the query is valid
+  if (recipeQuery === "") {
+    // Show the modal
+    const modalEmptySubmit = document.getElementById("modal1");
+    var modalInstance = M.Modal.getInstance(modalEmptySubmit);
+    modalInstance.open();
+    return;
+  }
   // fetch url below will include the recipe query input and return the nutrition info
   const spoonacularUrl =
     "https://api.spoonacular.com/recipes/complexSearch?query=" +
@@ -225,9 +225,9 @@ recipeInputForm.addEventListener("submit", function (e) {
     })
     .catch(function (error) {
       console.log(error);
-      // modal here if necessary
     });
 });
+
 function goBackEvent(data) {
   goBackBtn.addEventListener("click", function () {
     resultsContainer.classList.add("hide");
