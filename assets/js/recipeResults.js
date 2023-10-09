@@ -162,27 +162,25 @@ function hideHeros() {
 
 // //////////////////////// Error Modals ////////////////////////
 
-function recipeModalError() {
-  //TODO VALIADATION ON EMPTY VALUE, NO RESULTS FOUND, NO SPECIAL CHARACTERS
-  const recipeHelper = document.getElementById("recipe-helper");
-  if (recipeQuery === "") {
-    recipeHelper.classList.remove("hide");
-    recipeHelper.setAttribute("data-success", '""');
-    return;
-  } else if (!recipeQuery.isLetter()) {
-    recipeHelper.classList.remove("hide");
-    recipeHelper.setAttribute("data-success", '""');
-    return;
-  }
-}
+function recipeModalError() {}
 
+document.addEventListener("DOMContentLoaded", function () {
+  var elems = document.querySelectorAll(".modal");
+  var instances = M.Modal.init(elems, {
+    dismissible: true,
+  });
+});
 //////////////////////// Event Listener ////////////////////////
 // Get recipe query results based on user input
 recipeInputForm.addEventListener("submit", function (e) {
   e.preventDefault();
   e.stopPropagation();
-  if (!recipeModalError(recipeQuery)) {
-    console.log("enter a valid response");
+
+  if (recipeQuery === "") {
+    // Show the modal
+    const modalEmptySubmit = document.getElementById("modal1");
+    var modalInstance = M.Modal.getInstance(modalEmptySubmit);
+    modalInstance.open();
     return;
   }
   // below clears out any previously generated cards from previous searches
@@ -216,6 +214,10 @@ recipeInputForm.addEventListener("submit", function (e) {
     })
     .then(function (data) {
       dataResults = data.results;
+      if (data.results.length === 0) {
+        recipeModalError();
+        return;
+      }
       hideHeros();
       renderRecipePictureCards(data);
       goBackEvent(data);
