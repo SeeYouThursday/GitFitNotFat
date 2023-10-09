@@ -176,6 +176,7 @@ recipeInputForm.addEventListener("submit", function (e) {
   e.preventDefault();
   e.stopPropagation();
 
+
   // below clears out any previously generated cards from previous searches
   clearRecipeCards();
   removeSelectionCard();
