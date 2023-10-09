@@ -1,5 +1,6 @@
 //////////////////////// Selectors ////////////////////////
 const recipeInputForm = document.getElementById("recipeSearch");
+const selectingInput = document.getElementById("selectingInput");
 const recipeContainer = document.getElementById("recipe-container");
 const goBackBtn = document.getElementById("goBack");
 const confirmRecipeBtn = document.getElementById("confirm-recipe");
@@ -37,7 +38,10 @@ const createCards =
   "</div>";
 
 function clearRecipeCards() {
-  recipeContainer.replaceChildren("");
+  if (recipeContainer.hasChildNodes) {
+    recipeContainer.replaceChildren("");
+    console.log("clearcards");
+  } else return;
 }
 
 // Selection Rendering
@@ -53,15 +57,16 @@ function renderRecipeSelection(data) {
   const removeRecipeBtn = document.querySelector(".after-selection");
   removeRecipeBtn.remove();
   // removes the red btn from the image // might not need if rerendered into horizontal card
-  changeCardSize.setAttribute("id", "removal");
+  // changeCardSize.setAttribute("id", "removal");
   changeCardSize.classList.remove("m3");
-  changeCardSize.classList.add("m6");
+  changeCardSize.classList.add("m6", "removal");
   recipeImage = selectedRecipe[0].image;
   cardTitleEl.textContent = selectedRecipe[0].title;
   recipeImgEl.setAttribute("src", recipeImage);
   moreInfoRecipeEl.textContent = "Recipe Link";
   moreInfoRecipeEl.setAttribute("href", selectedRecipe[0].sourceUrl);
   recipeSummary.innerHTML = selectedRecipe[0].summary;
+  recipeSummary.classList.add("removal");
 }
 // Left off here 1009pm 10.5
 function showNavigationBtns() {
@@ -115,6 +120,7 @@ function renderRecipePictureCards(data) {
   selectRecipeBtn.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
+      removeSelectionCard();
       console.log("clicked");
       // reset selectedRecipe Array to clear out previous selection
       selectedRecipe = [];
@@ -129,21 +135,13 @@ function renderRecipePictureCards(data) {
   });
 }
 
-function goBackEvent(data) {
-  goBackBtn.addEventListener("click", function () {
-    resultsContainer.classList.add("hide");
-    removeSelectionCard();
-    console.log("remove Selection go back");
-    navigationBtns.classList.add("hide");
-    renderRecipePictureCards(data);
-  });
-}
-
 function removeSelectionCard() {
-  const removal = document.querySelector("#removal");
-  if (removal) {
-    removal.remove();
-    console.log("Element with id 'removal' was removed");
+  const removal = document.querySelectorAll(".removal");
+  if (removal.length !== 0) {
+    for (var i = 0; i < removal.length; i++) {
+      removal[i].remove();
+      console.log("Element with id 'removal' was removed");
+    }
   } else {
     console.log("No element with id 'removal' found");
   }
@@ -170,15 +168,9 @@ recipeInputForm.addEventListener("submit", function (e) {
 
   // below clears out any previously generated cards from previous searches
   removeSelectionCard();
-  // try {
-  //   removeSelectionCard();
-  // } catch (error) {
-  //   console.error(error);
-  // }
 
-  clearRecipeCards();
-  console.log("clearcards");
-  recipeQuery = e.target.lastElementChild.value;
+  recipeQuery = document.querySelector("input").value;
+
   // fetch url below will include the recipe query input and return the nutrition info
   // we can comment out the snack type and mostly get entrees
   const spoonacularUrl =
@@ -204,6 +196,7 @@ recipeInputForm.addEventListener("submit", function (e) {
       hideHeros();
       renderRecipePictureCards(data);
       // showCarousel();
+      console.log(data);
       goBackEvent(data);
       return data;
     })
@@ -211,3 +204,12 @@ recipeInputForm.addEventListener("submit", function (e) {
       console.log(error);
     });
 });
+function goBackEvent(data) {
+  goBackBtn.addEventListener("click", function () {
+    resultsContainer.classList.add("hide");
+    removeSelectionCard();
+    console.log("remove Selection go back");
+    navigationBtns.classList.add("hide");
+    renderRecipePictureCards(data);
+  });
+}

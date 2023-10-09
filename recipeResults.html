@@ -38,7 +38,7 @@
       <div class="text-block flex" id="recipeSearchBox">
         <div class="recipeInput container">
           <form id="recipeSearch" class="flex">
-            <div class="input-field">
+            <div id="selectingInput" class="input-field">
               <h3 id="recipeSearchTitle">Recipe Search</h3>
               <label id="search-label" for="search-recipe">
                 <span id="shrink-label" class="hide">Recipe Search</span></label
@@ -48,9 +48,10 @@
                 name="recipe"
                 id="search-recipe"
                 placeholder="Search a Recipe Here!"
-                class="validate"
-              />
-              <span class="helper-text" data-error="wrong" data-success="right"
+              /><span
+                class="helper-text"
+                data-error="wrong"
+                data-success="right"
                 >Please enter a valid search</span
               >
             </div>
