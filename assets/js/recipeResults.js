@@ -37,15 +37,49 @@ const createCards =
   "</div>" +
   "</div>";
 
-function clearRecipeCards() {
-  if (recipeContainer.hasChildNodes) {
-    recipeContainer.replaceChildren("");
-    console.log("clearcards");
-  } else return;
+// Rendering Initial Recipe Results Page (multiple cards created)
+function renderRecipePictureCards(data) {
+  // below function is to make sure that Materialize will apply its style to the newly created elements in the 'for' loop
+  M.AutoInit();
+  for (var i = 0; i < dataResults.length; i++) {
+    recipeContainer.insertAdjacentHTML("beforeend", createCards);
+    recipeImage = dataResults[i].image;
+    const recipeImgEl = document.querySelectorAll(".insert-img");
+    const moreInfoRecipeEl = document.querySelectorAll(".more-info");
+    const cardTitleEl = document.querySelectorAll(".card-title");
+    const recipeBtns = document.querySelectorAll(".add-recipe");
+    const caloriePreview = document.querySelectorAll(".caloriesPerServing");
+    // const recipeSummary = document.querySelectorAll(".recipe-summary");
+    const recipeTitle = dataResults[i].title;
+    cardTitleEl[i].textContent = recipeTitle;
+    recipeImgEl[i].setAttribute("src", recipeImage);
+    recipeImgEl[i].setAttribute("alt", recipeTitle);
+    moreInfoRecipeEl[i].textContent = "Recipe Link";
+    moreInfoRecipeEl[i].setAttribute("href", data.results[0].sourceUrl);
+    recipeBtns[i].setAttribute("data-recipe", i);
+    caloriePreview[i].textContent =
+      "Calories per Serving: " + dataResults[i].nutrition.nutrients[0].amount;
+  }
+  const selectRecipeBtn = document.querySelectorAll(".add-recipe");
+
+  selectRecipeBtn.forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      removeSelectionCard();
+      // reset selectedRecipe Array to clear out previous selection
+      selectedRecipe = [];
+      const getRecipeIndex = e.target.getAttribute("data-recipe");
+      selectedRecipe.push(dataResults[getRecipeIndex]);
+      const stringifyCR = JSON.stringify(selectedRecipe);
+      localStorage.setItem("Selected Recipe", stringifyCR);
+      renderRecipeSelection(data);
+      showNavigationBtns();
+      renderSelectionNutrients(data);
+    });
+  });
 }
 
-// Selection Rendering
-
+// Selection Rendering - after user chooses from the picture cards above
 function renderRecipeSelection(data) {
   clearRecipeCards();
   if (document.querySelector("#nutrients-container", ".hide")) {
@@ -72,15 +106,6 @@ function renderRecipeSelection(data) {
   moreInfoRecipeEl.setAttribute("href", selectedRecipe[0].sourceUrl);
   recipeSummary.innerHTML = selectedRecipe[0].summary;
 }
-// Left off here 1009pm 10.5
-function showNavigationBtns() {
-  // once selection is made via the EvLi in RRPCard,
-  // add confirm button and go back btn
-  navigationBtns.classList.remove("hide");
-  resultsContainer.classList.remove("hide");
-  // if confirm, move to the workout page,
-  // if go back, call rRRPCards
-}
 
 function renderSelectionNutrients(data) {
   const servings = document.getElementById("servings");
@@ -95,49 +120,23 @@ function renderSelectionNutrients(data) {
   protein.textContent = "Protein: " + nutritents[8].amount;
   fat.textContent = "Fat: " + nutritents[1].amount;
 }
-// Multiple Results Below
-function renderRecipePictureCards(data) {
-  // below function is to make sure that Materialize will apply its style to the newly created elements in the 'for' loop
-  M.AutoInit();
-  for (var i = 0; i < dataResults.length; i++) {
-    recipeContainer.insertAdjacentHTML("beforeend", createCards);
-    recipeImage = dataResults[i].image;
-    const recipeImgEl = document.querySelectorAll(".insert-img");
-    const moreInfoRecipeEl = document.querySelectorAll(".more-info");
-    const cardTitleEl = document.querySelectorAll(".card-title");
-    const recipeBtns = document.querySelectorAll(".add-recipe");
-    const caloriePreview = document.querySelectorAll(".caloriesPerServing");
-    // const recipeSummary = document.querySelectorAll(".recipe-summary");
-    const recipeTitle = dataResults[i].title;
-    cardTitleEl[i].textContent = recipeTitle;
-    recipeImgEl[i].setAttribute("src", recipeImage);
-    recipeImgEl[i].setAttribute("alt", recipeTitle);
-    moreInfoRecipeEl[i].textContent = "Recipe Link";
-    moreInfoRecipeEl[i].setAttribute("href", data.results[0].sourceUrl);
-    recipeBtns[i].setAttribute("data-recipe", i);
-    caloriePreview[i].textContent =
-      "Calories per Serving: " + dataResults[i].nutrition.nutrients[0].amount;
-    // recipeSummary[i].innerHTML = dataResults[i].summary;
-  }
-  const selectRecipeBtn = document.querySelectorAll(".add-recipe");
 
-  selectRecipeBtn.forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      removeSelectionCard();
-      // reset selectedRecipe Array to clear out previous selection
-      selectedRecipe = [];
-      const getRecipeIndex = e.target.getAttribute("data-recipe");
-      selectedRecipe.push(dataResults[getRecipeIndex]);
-      const stringifyCR = JSON.stringify(selectedRecipe);
-      localStorage.setItem("Selected Recipe", stringifyCR);
-      renderRecipeSelection(data);
-      showNavigationBtns();
-      renderSelectionNutrients(data);
-    });
-  });
+function showNavigationBtns() {
+  // once selection is made via the EvLi in RRPCard,
+  // add confirm button and go back btn
+  navigationBtns.classList.remove("hide");
+  resultsContainer.classList.remove("hide");
+  // if confirm, move to the workout page,
+  // if go back, call rRRPCards
 }
 
+// Clearing/Removing/Hiding Elements and/or their contents
+function clearRecipeCards() {
+  if (recipeContainer.hasChildNodes) {
+    recipeContainer.replaceChildren("");
+    console.log("clearcards");
+  } else return;
+}
 function removeSelectionCard() {
   const removal = document.querySelectorAll(".removal");
   if (removal.length !== 0) {
@@ -161,32 +160,47 @@ function hideHeros() {
   heroText.classList.remove("hero-text", "text-block");
 }
 
-// function recipeModalError {
+// //////////////////////// Error Modals ////////////////////////
 
-// }
+function recipeModalError() {
+  //TODO VALIADATION ON EMPTY VALUE, NO RESULTS FOUND, NO SPECIAL CHARACTERS
+  const recipeHelper = document.getElementById("recipe-helper");
+  if (recipeQuery === "") {
+    recipeHelper.classList.remove("hide");
+    recipeHelper.setAttribute("data-success", '""');
+    return;
+  } else if (!recipeQuery.isLetter()) {
+    recipeHelper.classList.remove("hide");
+    recipeHelper.setAttribute("data-success", '""');
+    return;
+  }
+}
 
 //////////////////////// Event Listener ////////////////////////
 // Get recipe query results based on user input
 recipeInputForm.addEventListener("submit", function (e) {
   e.preventDefault();
   e.stopPropagation();
-
+  if (!recipeModalError(recipeQuery)) {
+    console.log("enter a valid response");
+    return;
+  }
   // below clears out any previously generated cards from previous searches
+  clearRecipeCards();
+  removeSelectionCard();
+
   if (navigationBtns.classList.contains("hide")) {
   } else {
     navigationBtns.classList.add("hide");
   }
 
-  clearRecipeCards();
-  removeSelectionCard();
   recipeQuery = document.querySelector("input").value;
+  //TODO VALIADATION ON EMPTY VALUE, NO RESULTS FOUND, NO SPECIAL CHARACTERS
 
   // fetch url below will include the recipe query input and return the nutrition info
-  // we can comment out the snack type and mostly get entrees
   const spoonacularUrl =
     "https://api.spoonacular.com/recipes/complexSearch?query=" +
     recipeQuery +
-    // "&type=snack" +
     "&addRecipeNutrition=true" +
     "&apiKey=" +
     spoonacularKey;
@@ -201,17 +215,15 @@ recipeInputForm.addEventListener("submit", function (e) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data, "in fetch");
       dataResults = data.results;
       hideHeros();
       renderRecipePictureCards(data);
-      // showCarousel();
-      console.log(data);
       goBackEvent(data);
       return data;
     })
     .catch(function (error) {
       console.log(error);
+      // modal here if necessary
     });
 });
 function goBackEvent(data) {
