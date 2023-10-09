@@ -7,7 +7,7 @@ const resultsContainer = document.getElementById("results-container");
 const nutrientsContainer = document.getElementById("nutrients-container");
 const navigationBtns = document.getElementById("navigationBtns");
 const recipeSummary = document.querySelector("#recipe-summary");
-const removal = document.getElementById("removal");
+const removal = document.querySelector("#removal");
 
 ///////Empty Variables for later use ////////////////////////
 let dataResults = "";
@@ -119,11 +119,9 @@ function renderRecipePictureCards(data) {
       // reset selectedRecipe Array to clear out previous selection
       selectedRecipe = [];
       const getRecipeIndex = e.target.getAttribute("data-recipe");
-      console.log(getRecipeIndex);
       selectedRecipe.push(dataResults[getRecipeIndex]);
       const stringifyCR = JSON.stringify(selectedRecipe);
       localStorage.setItem("Selected Recipe", stringifyCR);
-      console.log("btn", stringifyCR);
       renderRecipeSelection(data);
       showNavigationBtns();
       renderSelectionNutrients(data);
@@ -135,18 +133,21 @@ function goBackEvent(data) {
   goBackBtn.addEventListener("click", function () {
     resultsContainer.classList.add("hide");
     removeSelectionCard();
+    console.log("remove Selection go back");
     navigationBtns.classList.add("hide");
     renderRecipePictureCards(data);
   });
 }
 
 function removeSelectionCard() {
-  if (removal !== null && removal !== undefined) {
+  if (removal) {
     removal.remove();
+    console.log("Element with id 'removal' was removed");
   } else {
-    return;
+    console.log("No element with id 'removal' found");
   }
 }
+
 // Changes out hero Images
 function hideHeros() {
   const heroImage = document.querySelector("main");
@@ -155,6 +156,10 @@ function hideHeros() {
   heroImage.setAttribute("class", "hero-results");
   heroText.classList.remove("hero-text", "text-block");
 }
+
+// function recipeModalError {
+
+// }
 
 //////////////////////// Event Listener ////////////////////////
 // Get recipe query results based on user input
@@ -165,6 +170,7 @@ recipeInputForm.addEventListener("submit", function (e) {
   // below clears out any previously generated cards from previous searches
   if (removal !== null) {
     removeSelectionCard();
+    console.log("remove Selection eventListener");
   }
   // try {
   //   removeSelectionCard();
@@ -173,7 +179,7 @@ recipeInputForm.addEventListener("submit", function (e) {
   // }
 
   clearRecipeCards();
-
+  console.log("clearcards");
   recipeQuery = e.target.lastElementChild.value;
   // fetch url below will include the recipe query input and return the nutrition info
   // we can comment out the snack type and mostly get entrees
@@ -184,7 +190,6 @@ recipeInputForm.addEventListener("submit", function (e) {
     "&addRecipeNutrition=true" +
     "&apiKey=" +
     spoonacularKey;
-  console.log(recipeQuery, "current");
   fetch(spoonacularUrl, {
     method: "GET",
     headers: {
