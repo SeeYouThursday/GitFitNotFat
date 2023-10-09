@@ -51,12 +51,23 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+function errorCheckModal() {
+  const modalEmptySubmit = document.getElementById("modal1");
+  var modalInstance = M.Modal.getInstance(modalEmptySubmit);
+  modalInstance.open();
+  return;
+}
 //////////////////////// Event Listener ////////////////////////
 // Nutrionix Exercise API Fetches exercise from user input
 workoutSearchForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const exerciseQuery = exerciseQueryInput.value.trim();
   const exerciseAPI = "https://trackapi.nutritionix.com/v2/natural/exercise";
+
+  if (exerciseQuery === "") {
+    // Show the modal
+    errorCheckModal();
+  }
 
   fetch(exerciseAPI, {
     method: "POST",
@@ -71,6 +82,7 @@ workoutSearchForm.addEventListener("submit", function (event) {
   })
     .then((response) => {
       if (!response.ok) {
+        errorCheckModal();
         throw new Error("!!!");
       }
       return response.json();
@@ -86,13 +98,8 @@ workoutSearchForm.addEventListener("submit", function (event) {
     })
     .catch((error) => {
       console.log("Response Error", error);
+      errorCheckModal();
     });
-});
-
-const resetButton = document.getElementById("reset");
-
-resetButton.addEventListener("click", function () {
-  window.location.href = "./index.html";
 });
 
 ////For future development////
