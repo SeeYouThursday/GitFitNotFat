@@ -48,7 +48,12 @@ function clearRecipeCards() {
 
 function renderRecipeSelection(data) {
   clearRecipeCards();
-
+  if (document.querySelector("#nutrients-container", ".hide")) {
+    nutrientsContainer.classList.remove("hide");
+    console.log("checking hide");
+  } else {
+    console.log("nowhere to hide");
+  }
   nutrientsContainer.insertAdjacentHTML("afterbegin", createCards);
   const changeCardSize = document.querySelector(".change-size");
   const recipeImgEl = document.querySelector(".insert-img");
@@ -66,7 +71,6 @@ function renderRecipeSelection(data) {
   moreInfoRecipeEl.textContent = "Recipe Link";
   moreInfoRecipeEl.setAttribute("href", selectedRecipe[0].sourceUrl);
   recipeSummary.innerHTML = selectedRecipe[0].summary;
-  recipeSummary.classList.add("removal");
 }
 // Left off here 1009pm 10.5
 function showNavigationBtns() {
@@ -121,7 +125,6 @@ function renderRecipePictureCards(data) {
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
       removeSelectionCard();
-      console.log("clicked");
       // reset selectedRecipe Array to clear out previous selection
       selectedRecipe = [];
       const getRecipeIndex = e.target.getAttribute("data-recipe");
@@ -141,7 +144,9 @@ function removeSelectionCard() {
     for (var i = 0; i < removal.length; i++) {
       removal[i].remove();
       console.log("Element with id 'removal' was removed");
+      nutrientsContainer.classList.add("hide");
     }
+    nutrientsContainer.classList.add("hide");
   } else {
     console.log("No element with id 'removal' found");
   }
@@ -167,8 +172,13 @@ recipeInputForm.addEventListener("submit", function (e) {
   e.stopPropagation();
 
   // below clears out any previously generated cards from previous searches
-  removeSelectionCard();
+  if (navigationBtns.classList.contains("hide")) {
+  } else {
+    navigationBtns.classList.add("hide");
+  }
 
+  clearRecipeCards();
+  removeSelectionCard();
   recipeQuery = document.querySelector("input").value;
 
   // fetch url below will include the recipe query input and return the nutrition info
@@ -208,6 +218,7 @@ function goBackEvent(data) {
   goBackBtn.addEventListener("click", function () {
     resultsContainer.classList.add("hide");
     removeSelectionCard();
+    clearRecipeCards();
     console.log("remove Selection go back");
     navigationBtns.classList.add("hide");
     renderRecipePictureCards(data);
