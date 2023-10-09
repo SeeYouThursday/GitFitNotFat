@@ -140,6 +140,7 @@ function goBackEvent(data) {
 }
 
 function removeSelectionCard() {
+  const removal = document.querySelector("#removal");
   if (removal) {
     removal.remove();
     console.log("Element with id 'removal' was removed");
@@ -168,10 +169,7 @@ recipeInputForm.addEventListener("submit", function (e) {
   e.stopPropagation();
 
   // below clears out any previously generated cards from previous searches
-  if (removal !== null) {
-    removeSelectionCard();
-    console.log("remove Selection eventListener");
-  }
+  removeSelectionCard();
   // try {
   //   removeSelectionCard();
   // } catch (error) {

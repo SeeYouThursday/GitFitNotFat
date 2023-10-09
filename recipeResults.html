@@ -23,7 +23,7 @@
   <body>
     <header>
       <nav>
-        <div class="nav-wrapper #b2dfdb teal lighten-2">
+        <div class="nav-wrapper #b2dfdb teal lighten-2 center-align">
           <a
             href="./index.html"
             class="brand-logo center 212121 grey-text text-darken-4"
@@ -35,19 +35,25 @@
     </header>
     <main class="hero-image">
       <!-- Search Div -->
-      <div class="text-block hero-text" id="recipeSearchBox">
-        <div class="recipeInput flex">
-          <form id="recipeSearch">
-            <label id="search-label" for="search-recipe"
-              ><h2>Recipe Search</h2>
-              <span id="shrink-label" class="hide">Recipe Search</span></label
-            >
-            <input
-              type="text"
-              name="recipe"
-              id="search-recipe"
-              placeholder="Search a Recipe Here!"
-            />
+      <div class="text-block flex" id="recipeSearchBox">
+        <div class="recipeInput container">
+          <form id="recipeSearch" class="flex">
+            <div class="input-field">
+              <h3 id="recipeSearchTitle">Recipe Search</h3>
+              <label id="search-label" for="search-recipe">
+                <span id="shrink-label" class="hide">Recipe Search</span></label
+              >
+              <input
+                type="text"
+                name="recipe"
+                id="search-recipe"
+                placeholder="Search a Recipe Here!"
+                class="validate"
+              />
+              <span class="helper-text" data-error="wrong" data-success="right"
+                >Please enter a valid search</span
+              >
+            </div>
           </form>
         </div>
       </div>
