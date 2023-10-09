@@ -83,8 +83,3 @@ workoutSearchForm.addEventListener("submit", function (event) {
     });
 });
 
-const resetButton = document.getElementById("reset");
-
-resetButton.addEventListener("click", function () {
-  window.location.href = "./index.html";
-});
