@@ -23,7 +23,7 @@
   <body>
     <header>
       <nav>
-        <div class="nav-wrapper #b2dfdb teal lighten-2">
+        <div class="nav-wrapper #b2dfdb teal lighten-2 center-align">
           <a
             href="./index.html"
             class="brand-logo center 212121 grey-text text-darken-4"
@@ -35,82 +35,85 @@
     </header>
     <main class="hero-image">
       <!-- Search Div -->
-      <div class="text-block hero-text" id="recipeSearchBox">
-        <div class="recipeInput flex">
-          <form id="recipeSearch">
-            <label id="search-label" for="search-recipe"
-              ><h2>Recipe Search</h2>
-              <span id="shrink-label" class="hide">Recipe Search</span></label
-            >
-            <input
-              type="text"
-              name="recipe"
-              id="search-recipe"
-              placeholder="Search a Recipe Here!"
-            />
-            <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1"
-              >Modal</a
-            > -->
-            <!-- Modal Structure -->
-            <!-- <div id="modal1" class="modal">
-              <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
+      <div class="text-block flex" id="recipeSearchBox">
+        <div class="recipeInput container">
+          <form id="recipeSearch" class="flex">
+            <div id="selectingInput" class="input-field">
+              <h3 id="recipeSearchTitle">Recipe Search</h3>
+              <label id="search-label" for="search-recipe">
+                <span id="shrink-label" class="hide">Recipe Search</span></label
+              >
+              <input
+                type="text"
+                name="recipe"
+                id="search-recipe"
+                placeholder="Search a Recipe Here!"
+                class="validate"
+                autofocus
+                validate
+              />
+              <!-- Modal Structure -->
+              <div id="modal1" class="modal modal-close">
+                <div class="modal-content">
+                  <a
+                    href="#!"
+                    class="modal-close waves-effect waves-green btn-flat right"
+                    ><i class="material-icons">close</i></a
+                  >
+                  <h4>Please enter a valid Search</h4>
+
+                  <p>
+                    You must use letters and/or numbers to complete a valid
+                    search. Empty searches are not accepted.
+                    <span>You've got this!</span>
+                  </p>
+                </div>
+                <div class="modal-header"></div>
               </div>
-              <div class="modal-footer">
-                <a
-                  href="#!"
-                  class="modal-close waves-effect waves-green btn-flat"
-                  >Agree</a
-                >
-              </div>
-            </div> -->
+            </div>
           </form>
         </div>
       </div>
 
-      <div>
-        <!-- Results Div Where all of the results populate -->
-        <div id="recipe-container" class="row"></div>
-        <!-- nutrients  -->
-        <div id="results-container" class="hide flex">
-          <div id="nutrients-container" class="">
-            <img src="" alt="" />
-            <div class="row">
-              <div class="col s12 m6">
-                <h6 class="card-title amber-text text-darken-4 amber lighten-5">
-                  Card Title
-                </h6>
-                <div class="card-panel teal">
-                  <h6 class="center-align">nutrients</h6>
-                  <ul>
-                    <li id="servings">Servings:</li>
-                    <li class="underline">Per serving:</li>
-                    <li id="calories">Calories:</li>
-                    <li id="carbs">Carbs:</li>
-                    <li id="fat">Fat:</li>
-                    <li id="protein">Protein:</li>
-                  </ul>
-                  <span class="white-text" id="recipe-summary"
-                    >I am a very simple card. I am good at containing small bits
-                    of information. I am convenient because I require little
-                    markup to use effectively. I am similar to what is called a
-                    panel in other frameworks.
-                  </span>
-                </div>
-              </div>
+      <!-- Results Div Where all of the results populate -->
+      <div id="recipe-container" class="row container"></div>
+      <!-- nutrients  -->
+      <div id="results-container" class="hide flex container">
+        <div id="nutrients-container" class="row">
+          <!-- <img src="" alt="" /> -->
+          <!-- <div class="row"> -->
+          <div class="col s12 m6">
+            <div class="card-panel white">
+              <h6 class="center-align">Nutrients</h6>
+              <ul>
+                <li id="servings">Servings:</li>
+                <li class="underline">Per serving:</li>
+                <li id="calories">Calories:</li>
+                <li id="carbs">Carbs:</li>
+                <li id="fat">Fat:</li>
+                <li id="protein">Protein:</li>
+              </ul>
+              <span class="teal-text" id="recipe-summary"> </span>
             </div>
           </div>
+          <!-- </div> -->
         </div>
       </div>
-      <div id="navigationBtns" class="container hide flex">
-        <button type="button" id="goBack" class="btn">Go back!</button>
-        <a id="confirm-recipe" class="btn" href="./workout.html">Confirm!</a>
+
+      <div id="navigationBtns" class="container flex-space-between hide">
+        <a id="goBack" class="waves-effect waves-light btn-large"> Go back! </a>
+        <a
+          id="confirm-recipe"
+          class="waves-effect waves-light btn-large"
+          href="./workout.html"
+          ><i class="tiny material-icons right"> check </i>Confirm!
+        </a>
       </div>
 
       <!-- Single Recipe Div - where your selection populates -->
     </main>
     <footer>
+
       <!-- Photo by <a href="https://unsplash.com/@goumbik?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Lukas Blazek</a> on <a href="https://unsplash.com/photos/f-TWhXOrLiU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
    -->
    <!-- Photo by <a href="https://unsplash.com/@brianwangenheim?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Brian Wangenheim</a> on <a href="https://unsplash.com/photos/kHopgHd6q-M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
@@ -121,6 +124,7 @@
 
    <!--
    -->
+
       <div class="footer-copyright #e0f2f1 teal lighten-5">
         <div class="container">
           <a class="212121 grey-text text-darken-4 right" href="#!">Links</a>
@@ -137,7 +141,10 @@
         </div>
       </div>
     </footer>
-
+    <!-- Photo by <a href="https://unsplash.com/@goumbik?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Lukas Blazek</a> on <a href="https://unsplash.com/photos/f-TWhXOrLiU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+   -->
+    <!-- Photo by <a href="https://unsplash.com/@brianwangenheim?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Brian Wangenheim</a> on <a href="https://unsplash.com/photos/kHopgHd6q-M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+   -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/recipeResults.js"></script>
   </body>

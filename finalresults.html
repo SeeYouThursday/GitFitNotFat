@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper #b2dfdb teal lighten-2">
+          <a
+            href="./index.html"
+            class="brand-logo center 212121 grey-text text-darken-4"
+            >GitFitNotFat</a
+          >
+          <ul id="nav-mobile" class="left hide-on-med-and-down"></ul>
+        </div>
+      </nav>
+    </header>
+    <div class="row">
+      <div class="card col s12 m5 offset-m1 hoverable">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img
+            id="recipe-image"
+            class="activator responsive-img"
+            src=""
+            alt="recipe card image"
+          />
+        </div>
+        <div class="card-content">
+          <span
+            class="card-title activator grey-text text-darken-4"
+            id="recipe-title"
+            >Card Title<i class="material-icons right">more_vert</i></span
+          >
+          <p><a id="recipe-link" href="#">This is a link</a></p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"
+            >Card Title<i class="material-icons right">close</i></span
+          >
+          <p id="recipe-summary">
+            Here is some more information about this product that is only
+            revealed once clicked on.
+          </p>
+        </div>
+      </div>
+      <div class="divider col"></div>
+      <div class="card col s12 m5 hoverable">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img
+            class="activator responsive-img"
+            src="./assets/images/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg"
+            alt="workout card image"
+          />
+        </div>
+        <div class="card-content">
+          <span
+            class="card-title activator grey-text text-darken-4"
+            id="duration-workout"
+            >Duration Minutes<i class="material-icons right">more_vert</i></span
+          >
+          <p id="calories-burned-calculation">calories burned calculation</p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"
+            >Card Title<i class="material-icons right">close</i></span
+          >
+          <p>
+            Here is some more information about this product that is only
+            revealed once clicked on.
+          </p>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-copyright #e0f2f1 teal lighten-5">
+        <div class="container">
+          © 2014 Copyright Text
+          <a class="212121 grey-text text-darken-4 right" href="#!">Links</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/js/finalresults.js"></script>
+  </body>
+</html>

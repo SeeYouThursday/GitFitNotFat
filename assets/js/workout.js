@@ -32,6 +32,12 @@ function durationToBurnCalories() {
   console.log(caloriesBurnedCalculation);
   caloriesBurnedDisplay.textContent =
     "Calories Burned: " + caloriesBurnedCalculation + " calories";
+
+  localStorage.setItem("Duration Minutes", durationMinutes);
+  localStorage.setItem(
+    "Calories Burned Calculation",
+    caloriesBurnedCalculation
+  );
   return durationMinutes;
 }
 
@@ -75,4 +81,10 @@ workoutSearchForm.addEventListener("submit", function (event) {
     .catch((error) => {
       console.log("Response Error", error);
     });
+});
+
+const resetButton = document.getElementById("reset");
+
+resetButton.addEventListener("click", function () {
+  window.location.href = "./index.html";
 });
