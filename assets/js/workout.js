@@ -32,6 +32,12 @@ function durationToBurnCalories() {
   console.log(caloriesBurnedCalculation);
   caloriesBurnedDisplay.textContent =
     "Calories Burned: " + caloriesBurnedCalculation + " calories";
+
+  localStorage.setItem("Duration Minutes", durationMinutes);
+  localStorage.setItem(
+    "Calories Burned Calculation",
+    caloriesBurnedCalculation
+  );
   return durationMinutes;
 }
 
