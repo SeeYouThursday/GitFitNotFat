@@ -176,13 +176,13 @@ recipeInputForm.addEventListener("submit", function (e) {
   e.preventDefault();
   e.stopPropagation();
 
-  if (recipeQuery === "") {
-    // Show the modal
-    const modalEmptySubmit = document.getElementById("modal1");
-    var modalInstance = M.Modal.getInstance(modalEmptySubmit);
-    modalInstance.open();
-    return;
-  }
+  // if (recipeQuery === "") {
+  //   // Show the modal
+  //   const modalEmptySubmit = document.getElementById("modal1");
+  //   var modalInstance = M.Modal.getInstance(modalEmptySubmit);
+  //   modalInstance.open();
+  //   return;
+  // }
   // below clears out any previously generated cards from previous searches
   clearRecipeCards();
   removeSelectionCard();
