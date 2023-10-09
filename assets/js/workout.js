@@ -76,3 +76,9 @@ workoutSearchForm.addEventListener("submit", function (event) {
       console.log("Response Error", error);
     });
 });
+
+const resetButton = document.getElementById("reset");
+
+resetButton.addEventListener("click", function () {
+  window.location.href = "./index.html";
+});
