@@ -1,5 +1,6 @@
 //////////////////////// Selectors ////////////////////////
 const recipeInputForm = document.getElementById("recipeSearch");
+const selectingInput = document.getElementById("selectingInput");
 const recipeContainer = document.getElementById("recipe-container");
 const goBackBtn = document.getElementById("goBack");
 const confirmRecipeBtn = document.getElementById("confirm-recipe");
@@ -7,7 +8,7 @@ const resultsContainer = document.getElementById("results-container");
 const nutrientsContainer = document.getElementById("nutrients-container");
 const navigationBtns = document.getElementById("navigationBtns");
 const recipeSummary = document.querySelector("#recipe-summary");
-const removal = document.getElementById("removal");
+const removal = document.querySelector("#removal");
 
 ///////Empty Variables for later use ////////////////////////
 let dataResults = "";
@@ -37,14 +38,22 @@ const createCards =
   "</div>";
 
 function clearRecipeCards() {
-  recipeContainer.replaceChildren("");
+  if (recipeContainer.hasChildNodes) {
+    recipeContainer.replaceChildren("");
+    console.log("clearcards");
+  } else return;
 }
 
 // Selection Rendering
 
 function renderRecipeSelection(data) {
   clearRecipeCards();
-
+  if (document.querySelector("#nutrients-container", ".hide")) {
+    nutrientsContainer.classList.remove("hide");
+    console.log("checking hide");
+  } else {
+    console.log("nowhere to hide");
+  }
   nutrientsContainer.insertAdjacentHTML("afterbegin", createCards);
   const changeCardSize = document.querySelector(".change-size");
   const recipeImgEl = document.querySelector(".insert-img");
@@ -53,9 +62,9 @@ function renderRecipeSelection(data) {
   const removeRecipeBtn = document.querySelector(".after-selection");
   removeRecipeBtn.remove();
   // removes the red btn from the image // might not need if rerendered into horizontal card
-  changeCardSize.setAttribute("id", "removal");
+  // changeCardSize.setAttribute("id", "removal");
   changeCardSize.classList.remove("m3");
-  changeCardSize.classList.add("m6");
+  changeCardSize.classList.add("m6", "removal");
   recipeImage = selectedRecipe[0].image;
   cardTitleEl.textContent = selectedRecipe[0].title;
   recipeImgEl.setAttribute("src", recipeImage);
@@ -115,15 +124,13 @@ function renderRecipePictureCards(data) {
   selectRecipeBtn.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
-      console.log("clicked");
+      removeSelectionCard();
       // reset selectedRecipe Array to clear out previous selection
       selectedRecipe = [];
       const getRecipeIndex = e.target.getAttribute("data-recipe");
-      console.log(getRecipeIndex);
       selectedRecipe.push(dataResults[getRecipeIndex]);
       const stringifyCR = JSON.stringify(selectedRecipe);
       localStorage.setItem("Selected Recipe", stringifyCR);
-      console.log("btn", stringifyCR);
       renderRecipeSelection(data);
       showNavigationBtns();
       renderSelectionNutrients(data);
@@ -131,22 +138,20 @@ function renderRecipePictureCards(data) {
   });
 }
 
-function goBackEvent(data) {
-  goBackBtn.addEventListener("click", function () {
-    resultsContainer.classList.add("hide");
-    removeSelectionCard();
-    navigationBtns.classList.add("hide");
-    renderRecipePictureCards(data);
-  });
-}
-
 function removeSelectionCard() {
-  if (removal !== null && removal !== undefined) {
-    removal.remove();
+  const removal = document.querySelectorAll(".removal");
+  if (removal.length !== 0) {
+    for (var i = 0; i < removal.length; i++) {
+      removal[i].remove();
+      console.log("Element with id 'removal' was removed");
+      nutrientsContainer.classList.add("hide");
+    }
+    nutrientsContainer.classList.add("hide");
   } else {
-    return;
+    console.log("No element with id 'removal' found");
   }
 }
+
 // Changes out hero Images
 function hideHeros() {
   const heroImage = document.querySelector("main");
@@ -156,6 +161,10 @@ function hideHeros() {
   heroText.classList.remove("hero-text", "text-block");
 }
 
+// function recipeModalError {
+
+// }
+
 //////////////////////// Event Listener ////////////////////////
 // Get recipe query results based on user input
 recipeInputForm.addEventListener("submit", function (e) {
@@ -163,18 +172,15 @@ recipeInputForm.addEventListener("submit", function (e) {
   e.stopPropagation();
 
   // below clears out any previously generated cards from previous searches
-  if (removal !== null) {
-    removeSelectionCard();
+  if (navigationBtns.classList.contains("hide")) {
+  } else {
+    navigationBtns.classList.add("hide");
   }
-  // try {
-  //   removeSelectionCard();
-  // } catch (error) {
-  //   console.error(error);
-  // }
 
   clearRecipeCards();
+  removeSelectionCard();
+  recipeQuery = document.querySelector("input").value;
 
-  recipeQuery = e.target.lastElementChild.value;
   // fetch url below will include the recipe query input and return the nutrition info
   // we can comment out the snack type and mostly get entrees
   const spoonacularUrl =
@@ -184,7 +190,6 @@ recipeInputForm.addEventListener("submit", function (e) {
     "&addRecipeNutrition=true" +
     "&apiKey=" +
     spoonacularKey;
-  console.log(recipeQuery, "current");
   fetch(spoonacularUrl, {
     method: "GET",
     headers: {
@@ -201,6 +206,7 @@ recipeInputForm.addEventListener("submit", function (e) {
       hideHeros();
       renderRecipePictureCards(data);
       // showCarousel();
+      console.log(data);
       goBackEvent(data);
       return data;
     })
@@ -208,3 +214,13 @@ recipeInputForm.addEventListener("submit", function (e) {
       console.log(error);
     });
 });
+function goBackEvent(data) {
+  goBackBtn.addEventListener("click", function () {
+    resultsContainer.classList.add("hide");
+    removeSelectionCard();
+    clearRecipeCards();
+    console.log("remove Selection go back");
+    navigationBtns.classList.add("hide");
+    renderRecipePictureCards(data);
+  });
+}
