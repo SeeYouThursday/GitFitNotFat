@@ -10,7 +10,6 @@ const workoutOutputContainer = document.getElementById(
 ///////Empty Variables for later use ////////////////////////
 let caloriesBurned = "";
 let workoutDurationValue = "";
-// let workoutImg = "";
 
 // API Key Information
 const nutritionixAPIKey = "c2b54dca13476d2a351b2efab070d586";
@@ -41,10 +40,17 @@ function durationToBurnCalories() {
   return durationMinutes;
 }
 
-// function renderWorkoutPhoto(data) {
-//   workoutOutputContainer.insertAdjacentHTML("beforeend", createCards);
-//   document.getElementById("workout-img").setAttribute("src", workoutImg);
-// }
+// //////////////////////// Error Modals ////////////////////////
+
+function recipeModalError() {}
+
+document.addEventListener("DOMContentLoaded", function () {
+  var elems = document.querySelectorAll(".modal");
+  var instances = M.Modal.init(elems, {
+    dismissible: true,
+  });
+});
+
 //////////////////////// Event Listener ////////////////////////
 // Nutrionix Exercise API Fetches exercise from user input
 workoutSearchForm.addEventListener("submit", function (event) {
@@ -88,3 +94,10 @@ const resetButton = document.getElementById("reset");
 resetButton.addEventListener("click", function () {
   window.location.href = "./index.html";
 });
+
+////For future development////
+// let workoutImg = "";
+// function renderWorkoutPhoto(data) {
+//   workoutOutputContainer.insertAdjacentHTML("beforeend", createCards);
+//   document.getElementById("workout-img").setAttribute("src", workoutImg);
+// }
