@@ -119,6 +119,7 @@ div .card .card-image .card-title {
   /* background-color: black; */
   padding: 5px;
   font-size: small;
+  text-align: center;
 }
 
 h2 {
@@ -132,6 +133,7 @@ h2 {
 ::placeholder {
   color: rgb(0, 0, 0);
   opacity: 1; /* Firefox */
+  text-align: center;
 }
 /* 
 @media screen and (max-width: 769) {
