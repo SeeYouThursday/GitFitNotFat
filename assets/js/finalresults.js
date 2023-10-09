@@ -31,3 +31,10 @@ if (selectedCaloriesData) {
 
   caloriesBurned.textContent = `Calories Burned: ${selectedCaloriesData}`;
 }
+
+///////////////// Event Listeners///////////////
+const resetButton = document.getElementById("reset");
+
+resetButton.addEventListener("click", function () {
+  window.location.href = "./index.html";
+});
