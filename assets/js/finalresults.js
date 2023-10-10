@@ -38,3 +38,8 @@ const resetButton = document.getElementById("reset");
 resetButton.addEventListener("click", function () {
   window.location.href = "./index.html";
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  var elems = document.querySelectorAll(".tooltipped");
+  var instances = M.Tooltip.init(elems);
+});
