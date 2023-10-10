@@ -88,8 +88,8 @@ function renderRecipeSelection(data) {
   } else {
     console.log("nowhere to hide");
   }
-  nutrientsContainer.insertAdjacentHTML("afterbegin", createCards);
-  const changeCardSize = document.querySelector(".change-size");
+  // nutrientsContainer.insertAdjacentHTML("afterbegin", createCards);
+  // const changeCardSize = document.querySelector(".change-size");
   const recipeImgEl = document.querySelector(".insert-img");
   const moreInfoRecipeEl = document.querySelector(".more-info");
   const cardTitleEl = document.querySelector(".card-title");
@@ -97,8 +97,8 @@ function renderRecipeSelection(data) {
   removeRecipeBtn.remove();
   // removes the red btn from the image // might not need if rerendered into horizontal card
   // changeCardSize.setAttribute("id", "removal");
-  changeCardSize.classList.remove("m3");
-  changeCardSize.classList.add("m6", "removal");
+  // changeCardSize.classList.remove("m3");
+  // changeCardSize.classList.add("m6", "removal");
   recipeImage = selectedRecipe[0].image;
   cardTitleEl.textContent = selectedRecipe[0].title;
   recipeImgEl.setAttribute("src", recipeImage);
