@@ -102,6 +102,12 @@ workoutSearchForm.addEventListener("submit", function (event) {
     });
 });
 
+const resultButton = document.getElementById("result-button");
+
+resultButton.addEventListener("click", function () {
+  window.location.href = "./finalresults.html";
+});
+
 ////For future development////
 // let workoutImg = "";
 // function renderWorkoutPhoto(data) {
