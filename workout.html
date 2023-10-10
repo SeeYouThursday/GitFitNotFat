@@ -36,11 +36,28 @@
           placeholder="Search Your Workout Here!"
         />
         <button id="activity-submit" type="submit">Submit!</button>
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal modal-close">
+          <div class="modal-content">
+            <a
+              href="#!"
+              class="modal-close waves-effect waves-green btn-flat right"
+              ><i class="material-icons">close</i></a
+            >
+            <h4><i class="material-icons">error
+            </i>No Valid Results </h4>
+            <p>
+              You must use letters and/or numbers to complete a valid
+              search. Empty searches are not accepted.
+              <span>You've got this!</span>
+            </p>
+          </div>
+          <div class="modal-header"></div>
+        </div>
       </form>
     </div>
     <hr />
     <div id="workout-output-container">
-      <!-- <img src="" alt="Nate's Workout Demo" /> -->
       <h2 id="workout-name"></h2>
       <ul>
         <li id="workout-duration">Duration</li>

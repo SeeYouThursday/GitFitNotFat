@@ -10,7 +10,6 @@ const workoutOutputContainer = document.getElementById(
 ///////Empty Variables for later use ////////////////////////
 let caloriesBurned = "";
 let workoutDurationValue = "";
-// let workoutImg = "";
 
 // API Key Information
 const nutritionixAPIKey = "c2b54dca13476d2a351b2efab070d586";
@@ -41,16 +40,34 @@ function durationToBurnCalories() {
   return durationMinutes;
 }
 
-// function renderWorkoutPhoto(data) {
-//   workoutOutputContainer.insertAdjacentHTML("beforeend", createCards);
-//   document.getElementById("workout-img").setAttribute("src", workoutImg);
-// }
+// //////////////////////// Error Modals ////////////////////////
+
+function recipeModalError() {}
+
+document.addEventListener("DOMContentLoaded", function () {
+  var elems = document.querySelectorAll(".modal");
+  var instances = M.Modal.init(elems, {
+    dismissible: true,
+  });
+});
+
+function errorCheckModal() {
+  const modalEmptySubmit = document.getElementById("modal1");
+  var modalInstance = M.Modal.getInstance(modalEmptySubmit);
+  modalInstance.open();
+  return;
+}
 //////////////////////// Event Listener ////////////////////////
 // Nutrionix Exercise API Fetches exercise from user input
 workoutSearchForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const exerciseQuery = exerciseQueryInput.value.trim();
   const exerciseAPI = "https://trackapi.nutritionix.com/v2/natural/exercise";
+
+  if (exerciseQuery === "") {
+    // Show the modal
+    errorCheckModal();
+  }
 
   fetch(exerciseAPI, {
     method: "POST",
@@ -65,6 +82,7 @@ workoutSearchForm.addEventListener("submit", function (event) {
   })
     .then((response) => {
       if (!response.ok) {
+        errorCheckModal();
         throw new Error("!!!");
       }
       return response.json();
@@ -80,6 +98,13 @@ workoutSearchForm.addEventListener("submit", function (event) {
     })
     .catch((error) => {
       console.log("Response Error", error);
+      errorCheckModal();
     });
 });
 
+////For future development////
+// let workoutImg = "";
+// function renderWorkoutPhoto(data) {
+//   workoutOutputContainer.insertAdjacentHTML("beforeend", createCards);
+//   document.getElementById("workout-img").setAttribute("src", workoutImg);
+// }
