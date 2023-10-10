@@ -13,7 +13,13 @@ body {
 main {
   flex: 1 0 auto;
 }
-
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
 .hero-image {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../images/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg");
@@ -33,11 +39,12 @@ main {
 #activity,
 #activity-submit {
   background-color: rgba(171, 171, 171, 0.499);
-  border: 5px solid #b2dfdb;
+  border: 2px solid #b2dfdb;
   border-radius: 5px; /* Black background with 0.5 opacity */
   /* background-color: black; */
   padding: 5px;
   font-size: small;
+  text-align: center;
 }
 
 ul {
