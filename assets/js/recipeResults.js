@@ -153,6 +153,12 @@ function hideHeros() {
 
 // //////////////////////// Error Modals ////////////////////////
 
+function recipeModalError() {
+  const modalEmptySubmit = document.getElementById("modal1");
+  var modalInstance = M.Modal.getInstance(modalEmptySubmit);
+  modalInstance.open();
+  return;
+}
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elems, {
@@ -226,3 +232,8 @@ function goBackEvent(data) {
     renderRecipePictureCards(data);
   });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  var elems = document.querySelectorAll(".tooltipped");
+  var instances = M.Tooltip.init(elems);
+});

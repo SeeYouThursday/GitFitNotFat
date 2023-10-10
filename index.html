@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gitfit Not Fat</title>
+    <title>GitFitNotFat</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
@@ -28,40 +28,40 @@
         </div>
       </nav>
     </header>
-    <main class="hero-image"> 
-      <div class="introBox"><div id="instructions-container">
-        <!-- <h2 id="nameGreeting"></h2> -->
-        <h3>How to Git Started!</h3>
-        <!-- break it up into chunks, possibly separate it into each page -->
-        <p>Click on the Start Gitting Fit button to take you to the next page. Pick a food you would like to search up to get the recipe. From the list of recipes, pick the one you would like and click on the "+" button. That will take you to the confirmation page with the nutritional information and once you're happy with your selection click the "confirm" button to be taken to the next page. On the next page, search up the workout that you would like to perform to burn the calories you would gain from eating the given recipe. The page will display the number of minutes you need to perform the chosen activity and the calories that it will burn. Once you click on the "final results" button you will be taken to the final results page that will display the recipe information and the workout information together in a single page. You can go back to the beginning by clicking the "reset" button at the end to start the process over.</p>
+    <main class="hero-image">
+      <div id="instructions-container" class="introBox">
+          <h3>How to Git Started!</h3>
+       
+        <div id="hidden-content" class="hide">
+          <p>
+            Click on the Start Gitting Fit button to start searching recipes!
+          </p>
+        </div>
+      
         <button
-            id="startGittingFitBtn"
-            class="waves-effect waves-light btn"
-            type="button"
-          >
-            Start Gitting Fit!
-          </button>
+          id="startGittingFitBtn"
+          class="waves-effect waves-light btn"
+          type="button"
+        >
+          Start Gitting Fit!
+        </button><a
+        class="btn tooltipped help-tooltip"
+        data-position="bottom"
+        data-tooltip="Click on the Start Gitting Fit button to start searching recipes!"
+        ><i class="material-icons">help</i></a
+      >
+    </div>
       </div>
-      <!-- <div id="name-container">
-        <form id="getName">
-          <input id="name" type="text" placeholder="Enter Your Name" />
-          <input id="weight" type="text" placeholder="Enter Your Weight" />
-          
-        </form>
-      </div></div> -->
+  
       <!-- New Page -->
-     
-    </main> 
+    </main>
     <footer>
-          <div class="footer-copyright #e0f2f1 teal lighten-4">
-            <div class="container">
-              © 2014 Copyright Text
-              <a class="212121 grey-text text-darken-4 right" href="#!"
-                >Links</a
-              >
-            </div>
-          </div>
-        </footer>
+      <div class="footer-copyright #e0f2f1 teal lighten-4">
+        <div class="container">
+          <a class="212121 grey-text text-darken-4 right" href="#!">Links</a>
+        </div>
+      </div>
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script src="./assets/js/script.js"></script>
