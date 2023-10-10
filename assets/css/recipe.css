@@ -114,7 +114,6 @@ div .card .card-image .card-title {
   /* background: rgb(0, 0, 0); Fallback color */
   /* background-color: #fc6c78; */
   background-color: rgba(171, 171, 171, 0.499);
-  border: 5px solid #b2dfdb;
   border-radius: 5px; /* Black background with 0.5 opacity */
   /* background-color: black; */
   padding: 5px;
@@ -166,4 +165,13 @@ h2 {
 /* icon prefix focus color */
 .input-field .prefix.active {
   color: #000;
+}
+.card-panel {
+  background-color: rgba(233, 233, 233, 0.619);
+  border: 5px solid #f3f2f2;
+}
+
+#selected-card {
+  background-color: rgba(233, 233, 233, 0.619);
+  border: 5px solid #f3f2f2;
 }
