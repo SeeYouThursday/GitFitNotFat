@@ -19,17 +19,16 @@ function storingNameWeight() {
 
 // This function will render the user's name at the top
 function getGreeting() {
-  const greetingEl = document.getElementById("nameGreeting")
+  const greetingEl = document.getElementById("nameGreeting");
   console.log(greetingEl);
-  greetingEl.textContent =
-    "Hello, " + localStorage.getItem("name") + "!";
+  greetingEl.textContent = "Hello, " + localStorage.getItem("name") + "!";
 }
 // This renders the recipe card to the page
 
 //////////////////////// Event Listeners////////////////////////
-getNameForm.addEventListener("click", function (event) {
-  event.stopPropagation();
-  event.preventDefault();
-  storingNameWeight();
-  getGreeting();
+
+const startGittingFitButton = document.getElementById("startGittingFitBtn");
+
+startGittingFitButton.addEventListener("click", function () {
+  window.location.href = "./recipeResults.html";
 });
