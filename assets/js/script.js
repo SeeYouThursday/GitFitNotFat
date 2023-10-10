@@ -30,7 +30,7 @@ function getGreeting() {
 const startGittingFitButton = document.getElementById("startGittingFitBtn");
 
 startGittingFitButton.addEventListener("click", function () {
-  window.location.href = "./recipeResults.html";
+  window.location.href = "./assets/html/recipeResults.html";
 });
 
 document.addEventListener("DOMContentLoaded", function () {

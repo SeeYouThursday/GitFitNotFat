@@ -42,7 +42,7 @@ if (selectedCaloriesData) {
 const resetButton = document.getElementById("reset");
 
 resetButton.addEventListener("click", function () {
-  window.location.href = "./index.html";
+  window.location.href = "/index.html";
 });
 
 document.addEventListener("DOMContentLoaded", function () {
