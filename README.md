@@ -2,7 +2,7 @@
 
 ## Description
 
-Pick a recipe then give calories, then user inputs their weight and activity they want to do to burn off those calories. The app then returns the duration of that activity needed to burn off the calories from the food selected.
+Pick a recipe then give calories, then user inputs their weight and activity they want to do to burn off those calories. The app then returns the duration of that activity needed to burn off the calories from the food selected. We learned how to avoid conflicts with merges while working with other collaborators in an agile work enviroment. Also, some APIs do not update their documents, and trial and error takes over. 
 
 ## Usage
 
