@@ -42,8 +42,6 @@ function durationToBurnCalories() {
 
 // //////////////////////// Error Modals ////////////////////////
 
-function recipeModalError() {}
-
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elems, {
@@ -107,6 +105,12 @@ const resultButton = document.getElementById("result-button");
 
 resultButton.addEventListener("click", function () {
   window.location.href = "./finalresults.html";
+});
+
+//// Tooltip Function
+document.addEventListener("DOMContentLoaded", function () {
+  var elems = document.querySelectorAll(".tooltipped");
+  var instances = M.Tooltip.init(elems);
 });
 
 ////For future development////
