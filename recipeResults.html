@@ -24,6 +24,7 @@
     <header>
       <nav>
         <div class="nav-wrapper #e0f2f1 teal lighten-4">
+          <!-- Return to Start Page -->
           <a
             href="./index.html"
             class="brand-logo center 212121 grey-text text-darken-4"
@@ -33,6 +34,7 @@
         </div>
       </nav>
     </header>
+    <!-- Main contains the hero img - see CSS -->
     <main class="hero-image">
       <!-- Search Div -->
       <div class="text-block flex" id="recipeSearchBox">
@@ -52,7 +54,7 @@
                 autofocus
                 validate
               />
-              <!-- Modal Structure -->
+              <!--Recipe Search Error Modal Structure -->
               <div id="modal1" class="modal modal-close">
                 <div class="modal-content">
                   <a
@@ -77,26 +79,27 @@
 
       <!-- Results Div Where all of the results populate -->
       <div id="recipe-container" class="row container"></div>
-      <!-- nutrients  -->
       <div id="results-container" class="hide flex container">
         <div id="nutrients-container" class="row">
-          <div class="col s12 m6 flex change-size"> 
-            <div id="selected-card" class="card hoverable flex-column"> 
-            <div class="card-image"> 
-            <img class="insert-img responsive-img" src="" alt=""> 
-            <h6 class="card-title amber-text text-darken-4 amber lighten-5">Card Title</h6> 
-            <button class="btn waves-effect waves-light red after-selection"><i class="material-icons add-recipe">add</i></button> 
-            </div> 
-            <div class="card-content"> 
-            <p class="caloriesPerServing"></p> 
+          <!-- Selection Card Rendered Below -->
+          <div class="col s12 m6 flex change-size">
+            <div id="selected-card" class="card hoverable flex-column">
+              <div class="card-image">
+                <img class="insert-img responsive-img" src="" alt="" />
+                <h6 class="card-title amber-text text-darken-4 amber lighten-5">
+                  Card Title
+                </h6>
+              </div>
+              <div class="card-content">
+                <p class="caloriesPerServing"></p>
+              </div>
+              <div class="card-action">
+                <a href="#" target="_blank" class="more-info">Recipe Link</a>
+              </div>
             </div>
-            <div class="card-action"> 
-            <a href="#" target="_blank" class="more-info">This is a link</a>
-            </div> 
-            </div> 
-            </div>
-          <!-- <img src="" alt="" /> -->
-          <!-- <div class="row"> -->
+          </div>
+
+          <!-- nutrients panel after selection  -->
           <div class="col s12 m6">
             <div class="card-panel">
               <h6 class="center-align">Nutrients</h6>
@@ -111,10 +114,9 @@
               <span class="teal-text" id="recipe-summary"> </span>
             </div>
           </div>
-          <!-- </div> -->
         </div>
       </div>
-
+      <!-- Buttons to navigate back to search results or move onto workout page -->
       <div id="navigationBtns" class="container flex-space-between hide">
         <a id="goBack" class="waves-effect waves-light btn-large"> Go back! </a>
         <a
@@ -124,41 +126,28 @@
           ><i class="tiny material-icons right"> check </i>Confirm!
         </a>
       </div>
-
-      <!-- Single Recipe Div - where your selection populates -->
     </main>
     <footer>
-      <!-- Photo by <a href="https://unsplash.com/@goumbik?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Lukas Blazek</a> on <a href="https://unsplash.com/photos/f-TWhXOrLiU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-   -->
-      <!-- Photo by <a href="https://unsplash.com/@brianwangenheim?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Brian Wangenheim</a> on <a href="https://unsplash.com/photos/kHopgHd6q-M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-   -->
-
-      <!-- Photo by <a href="https://unsplash.com/@aleskrivec?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Ales Krivec</a> on <a href="https://unsplash.com/photos/QnNqGoCnBg0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-   -->
-
-      <!--
-   -->
-
+      <!-- Hero Img Attribution Credit -->
       <div class="footer-copyright #e0f2f1 teal lighten-4">
         <div class="container">
-          <a class="212121 grey-text text-darken-4 right" href="#!">Links</a>
-          Photo by
-          <a
-            href="https://unsplash.com/@lore_schodts?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-            >Lore Schodts</a
-          >
-          on
-          <a
-            href="https://unsplash.com/photos/8BNGxSAQd6M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-            >Unsplash</a
-          >
+          <!-- <a class="212121 grey-text text-darken-4 right" href="#!">Links</a> -->
+          <p>
+            Photo by
+            <a
+              href="https://unsplash.com/@lore_schodts?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+              >Lore Schodts</a
+            >
+            on
+            <a
+              href="https://unsplash.com/photos/8BNGxSAQd6M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+              >Unsplash</a
+            >
+          </p>
         </div>
       </div>
     </footer>
-    <!-- Photo by <a href="https://unsplash.com/@goumbik?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Lukas Blazek</a> on <a href="https://unsplash.com/photos/f-TWhXOrLiU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-   -->
-    <!-- Photo by <a href="https://unsplash.com/@brianwangenheim?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Brian Wangenheim</a> on <a href="https://unsplash.com/photos/kHopgHd6q-M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-   -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/recipeResults.js"></script>
   </body>

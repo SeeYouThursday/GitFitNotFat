@@ -18,7 +18,7 @@ let selectedRecipe = [];
 
 const spoonacularKey = "5661b30edf15496e914efae71e0a25fc";
 //////////////////////// Rendering ////////////////////////
-
+// card HTML to be used to dynamically render Recipe Search Results
 const createCards =
   // below adjusting both s and m will size the whole card
   '<div class="col s12 m3 flex change-size">' +
@@ -49,7 +49,7 @@ function renderRecipePictureCards(data) {
     const cardTitleEl = document.querySelectorAll(".card-title");
     const recipeBtns = document.querySelectorAll(".add-recipe");
     const caloriePreview = document.querySelectorAll(".caloriesPerServing");
-    // const recipeSummary = document.querySelectorAll(".recipe-summary");
+
     const recipeTitle = dataResults[i].title;
     cardTitleEl[i].textContent = recipeTitle;
     recipeImgEl[i].setAttribute("src", recipeImage);
@@ -60,6 +60,7 @@ function renderRecipePictureCards(data) {
     caloriePreview[i].textContent =
       "Calories per Serving: " + dataResults[i].nutrition.nutrients[0].amount;
   }
+
   const selectRecipeBtn = document.querySelectorAll(".add-recipe");
 
   selectRecipeBtn.forEach(function (btn) {
@@ -88,17 +89,11 @@ function renderRecipeSelection(data) {
   } else {
     console.log("nowhere to hide");
   }
-  // nutrientsContainer.insertAdjacentHTML("afterbegin", createCards);
-  // const changeCardSize = document.querySelector(".change-size");
+
   const recipeImgEl = document.querySelector(".insert-img");
   const moreInfoRecipeEl = document.querySelector(".more-info");
   const cardTitleEl = document.querySelector(".card-title");
-  const removeRecipeBtn = document.querySelector(".after-selection");
-  removeRecipeBtn.remove();
-  // removes the red btn from the image // might not need if rerendered into horizontal card
-  // changeCardSize.setAttribute("id", "removal");
-  // changeCardSize.classList.remove("m3");
-  // changeCardSize.classList.add("m6", "removal");
+
   recipeImage = selectedRecipe[0].image;
   cardTitleEl.textContent = selectedRecipe[0].title;
   recipeImgEl.setAttribute("src", recipeImage);
@@ -122,15 +117,11 @@ function renderSelectionNutrients(data) {
 }
 
 function showNavigationBtns() {
-  // once selection is made via the EvLi in RRPCard,
-  // add confirm button and go back btn
   navigationBtns.classList.remove("hide");
   resultsContainer.classList.remove("hide");
-  // if confirm, move to the workout page,
-  // if go back, call rRRPCards
 }
 
-// Clearing/Removing/Hiding Elements and/or their contents
+//// Clearing/Removing/Hiding Elements and/or their contents
 function clearRecipeCards() {
   if (recipeContainer.hasChildNodes) {
     recipeContainer.replaceChildren("");
@@ -143,12 +134,11 @@ function removeSelectionCard() {
   if (removal.length !== 0) {
     for (var i = 0; i < removal.length; i++) {
       removal[i].remove();
-      console.log("Element with id 'removal' was removed");
       nutrientsContainer.classList.add("hide");
     }
     nutrientsContainer.classList.add("hide");
   } else {
-    console.log("No element with id 'removal' found");
+    return;
   }
 }
 
@@ -175,7 +165,6 @@ document.addEventListener("DOMContentLoaded", function () {
 recipeInputForm.addEventListener("submit", function (e) {
   e.preventDefault();
   e.stopPropagation();
-
 
   // below clears out any previously generated cards from previous searches
   clearRecipeCards();
@@ -209,7 +198,6 @@ recipeInputForm.addEventListener("submit", function (e) {
     },
   })
     .then(function (response) {
-      console.log(response);
       return response.json();
     })
     .then(function (data) {
@@ -225,6 +213,7 @@ recipeInputForm.addEventListener("submit", function (e) {
     })
     .catch(function (error) {
       console.log(error);
+      recipeModalError();
     });
 });
 
@@ -233,7 +222,6 @@ function goBackEvent(data) {
     resultsContainer.classList.add("hide");
     removeSelectionCard();
     clearRecipeCards();
-    console.log("remove Selection go back");
     navigationBtns.classList.add("hide");
     renderRecipePictureCards(data);
   });
