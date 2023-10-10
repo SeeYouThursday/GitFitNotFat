@@ -102,6 +102,7 @@ workoutSearchForm.addEventListener("submit", function (event) {
     });
 });
 
+// function for the result button that takes you to final results page
 const resultButton = document.getElementById("result-button");
 
 resultButton.addEventListener("click", function () {
