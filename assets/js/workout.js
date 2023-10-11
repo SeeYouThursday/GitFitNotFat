@@ -7,14 +7,29 @@ const caloriesBurnedDisplay = document.getElementById("calories-burned");
 const workoutOutputContainer = document.getElementById(
   "workout-output-container"
 );
+const resultButton = document.getElementById("result-button");
+
 ///////Empty Variables for later use ////////////////////////
 let caloriesBurned = "";
 let workoutDurationValue = "";
+let workoutNameInputValue = "";
 
 // API Key Information
 const nutritionixAPIKey = "c2b54dca13476d2a351b2efab070d586";
 const nutritionixAPIID = "4f52c431";
 //////////////////////// Rendering ////////////////////////
+
+// Title Case function from:
+//https://www.freecodecamp.org/news/three-ways-to-title-case-a-sentence-in-javascript-676a9175eb27/
+
+function titleCase(str) {
+  str = str.toLowerCase().split(" ");
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+  }
+  return str.join(" ");
+}
+
 function durationToBurnCalories() {
   console.log(caloriesBurned); //in 30 min
   console.log(workoutDurationValue);
@@ -34,6 +49,7 @@ function durationToBurnCalories() {
   caloriesBurnedDisplay.textContent =
     "Calories Burned: " + caloriesBurnedCalculation;
 
+  localStorage.setItem("Workout Name", titleCase(workoutNameInputValue));
   localStorage.setItem("Duration Minutes", durationMinutes);
   localStorage.setItem(
     "Calories Burned Calculation",
@@ -57,10 +73,12 @@ function errorCheckModal() {
   modalInstance.open();
   return;
 }
+
 //////////////////////// Event Listener ////////////////////////
 // Nutrionix Exercise API Fetches exercise from user input
 workoutSearchForm.addEventListener("submit", function (event) {
   event.preventDefault();
+  console.log("SUBMIT");
   const exerciseQuery = exerciseQueryInput.value.trim();
   const exerciseAPI = "https://trackapi.nutritionix.com/v2/natural/exercise";
 
@@ -89,11 +107,13 @@ workoutSearchForm.addEventListener("submit", function (event) {
     })
     .then((data) => {
       console.log(data);
-      workoutName.textContent = `${data.exercises[0].user_input}`;
+      workoutNameInputValue = data.exercises[0].user_input;
+      workoutName.textContent = workoutNameInputValue;
       caloriesBurned = data.exercises[0].nf_calories;
       workoutDurationValue = data.exercises[0].duration_min;
       workoutImg = data.exercises[0].photo.thumb;
       durationToBurnCalories(caloriesBurned);
+      resultButton.classList.remove("hide");
       //   renderWorkoutPhoto(data);
     })
     .catch((error) => {
@@ -103,7 +123,6 @@ workoutSearchForm.addEventListener("submit", function (event) {
 });
 
 // function for the result button that takes you to final results page
-const resultButton = document.getElementById("result-button");
 
 resultButton.addEventListener("click", function () {
   window.location.href = "./finalresults.html";

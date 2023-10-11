@@ -19,7 +19,7 @@
       <nav>
         <div class="nav-wrapper #e0f2f1 teal lighten-4">
           <a
-            href="./index.html"
+            href="../../index.html"
             class="brand-logo center 212121 grey-text text-darken-4"
             >GitFitNotFat</a
           >
@@ -27,12 +27,19 @@
         </div>
       </nav>
     </header>
-    <button class="btn" id="reset" type="reset">Reset</button>
+
     <!-- main contains the hero image with the class 'hero-final' see CSS -->
     <main class="hero-final">
+      <div class="row">
+        <a class="btn col s12" id="reset" href="../../index.html">Reset</a>
+      </div>
       <div class="row container flex">
         <!-- Selected Recipe Card -->
-        <div class="card col m5 hoverable selected-card">
+        <div
+          class="card col m5 hoverable selected-card tooltipped help-tooltip"
+          data-position="bottom"
+          data-tooltip="Click me to see summary!"
+        >
           <div class="card-image waves-effect waves-block waves-light">
             <img
               id="recipe-image"
@@ -50,8 +57,10 @@
             <p><a id="recipe-link" href="#" target="_blank">Recipe link</a></p>
           </div>
           <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"
-              >Card Title<i class="material-icons right">close</i></span
+            <span
+              class="card-title grey-text text-darken-4"
+              id="hidden-recipe-title"
+              >Card Title</span
             >
             <p id="recipe-summary">
               Here is some more information about this product that is only
@@ -59,33 +68,21 @@
             </p>
           </div>
         </div>
+        <!-- Workout Card -->
         <div class="card col m5 hoverable selected-card flow-text">
           <div class="card-image waves-effect waves-block waves-light">
             <img
-              class="activator responsive-img"
-              src="/assets/images/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg"
+              class="responsive-img"
+              src="../images/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg"
               alt="workout card image"
             />
           </div>
-          <!-- Workout Card -->
           <div class="card-content">
-            <span
-              class="card-title activator grey-text text-darken-4"
-              id="duration-workout"
-              >Duration Minutes<i class="material-icons right"
-                >more_vert</i
-              ></span
+            <span class="card-title grey-text text-darken-4" id="work-title"
+              >Card Title</span
             >
+            <p id="duration-workout">Duration Minutes</p>
             <p id="calories-burned-calculation">calories burned calculation</p>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"
-              >Card Title<i class="material-icons right">close</i></span
-            >
-            <p>
-              Here is some more information about this product that is only
-              revealed once clicked on.
-            </p>
           </div>
         </div>
       </div>

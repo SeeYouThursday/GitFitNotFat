@@ -12,14 +12,14 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="/assets/css/workout.css" />
+    <link rel="stylesheet" type="text/css" href="../css/workout.css" />
   </head>
   <body>
       <header>
         <nav>
           <div class="nav-wrapper #e0f2f1 teal lighten-4">
             <a
-              href="./index.html"
+            href="../../index.html"
               class="brand-logo center 212121 grey-text text-darken-4"
               >GitFitNotFat</a
             >
@@ -30,19 +30,16 @@
       <main class="hero-image">
         <!-- search bar div -->
         <div id="workout-container">
-      <form id="workout-search" class="flex">
+      <form id="workout-search" class="flex row">
         <input
           id="activity"
           type="text"
           placeholder="Search Your Workout Here!"
         />
-        <button id="activity-submit" type="submit">Submit!</button><a
-        class="btn tooltipped"
-        data-position="bottom"
-        data-tooltip="In the search box, look up the exercise you'd like to do to
-        work off that donut you've always wanted."
-        ><i class="material-icons">help</i></a
-      >
+        <div class="col s12 flex-row">
+        <button id="activity-submit" type="submit" class="btn center-align">Submit!</button><a href="#" class="floating-btn disabled teal-text text-lighten-4"><i class="material-icons tooltipped center-align" data-position="bottom"
+          data-tooltip="In the search box, look up the exercise you'd like to do to
+          work off that donut you've always wanted.">help</i></a></div>
         <!-- Modal Structure -->
         <div id="modal1" class="modal modal-close">
           <div class="modal-content">
@@ -63,25 +60,24 @@
         </div>
       </form>
     </div>
-    <hr />
     <!-- div to populate with workout duration and calories burned -->
     <div class="row">
-    <div id="workout-output-container" class="col s4 container">
+    <div id="workout-output-container" class="container">
       <h2 id="workout-name"></h2>
       <ul>
-        <li id="workout-duration">Duration</li>
-        <li id="calories-burned">Calories - Math Done Here</li>
+        <li id="workout-duration"></li>
+        <li id="calories-burned"></li>
       </ul>
     </div>
     <!-- result button that will take you to finalresults.html -->
-    <button
-            id="result-button"
-            class="waves-effect waves-light btn"
-            type="button"
-          >
-            Result!
-          </button>
-    </main>
+    
+    </main><button
+      id="result-button"
+      class="waves-effect waves-light btn hide"
+      type="button"
+    >
+      See Results Summary!
+    </button>
       <footer>
         <div class="footer-copyright #e0f2f1 teal lighten-5">
           <div class="container grey-text text-darken-4">
@@ -91,6 +87,6 @@
       </footer>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="/assets/js/workout.js"></script>
+    <script src="../js/workout.js"></script>
   </body>
 </html>
