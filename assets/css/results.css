@@ -23,7 +23,7 @@ main {
 
 .hero-final {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-  background-image: url("/assets/images/WorkoutBackgrounds/6DDEC4F2-B1A7-4EC5-B73C-AAD7013E7CD2_1_201_a.jpeg");
+  background-image: url("../images/WorkoutBackgrounds/6DDEC4F2-B1A7-4EC5-B73C-AAD7013E7CD2_1_201_a.jpeg");
   /* Set a specific height */
   /* height: 50%; */
   /* Position and center the image to scale nicely on all screens */
