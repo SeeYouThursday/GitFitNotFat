@@ -28,9 +28,10 @@
       </nav>
     </header>
     <button class="btn" id="reset" type="reset">Reset</button>
+    <!-- main contains the hero image with the class 'hero-final' see CSS -->
     <main class="hero-final">
       <div class="row container flex">
-        <!-- recipe card -->
+        <!-- Selected Recipe Card -->
         <div class="card col m5 hoverable selected-card">
           <div class="card-image waves-effect waves-block waves-light">
             <img
@@ -46,9 +47,8 @@
               id="recipe-title"
               >Card Title<i class="material-icons right">more_vert</i></span
             >
-            <p><a id="recipe-link" href="#">Recipe link</a></p>
+            <p><a id="recipe-link" href="#" target="_blank">Recipe link</a></p>
           </div>
-          <!-- Revealed content for recipe card -->
           <div class="card-reveal">
             <span class="card-title grey-text text-darken-4"
               >Card Title<i class="material-icons right">close</i></span
@@ -78,7 +78,6 @@
             >
             <p id="calories-burned-calculation">calories burned calculation</p>
           </div>
-          <!-- Revealed content for workout card -->
           <div class="card-reveal">
             <span class="card-title grey-text text-darken-4"
               >Card Title<i class="material-icons right">close</i></span
@@ -90,18 +89,25 @@
           </div>
         </div>
       </div>
-      
     </main>
     <footer>
-      
       <div class="footer-copyright #e0f2f1 teal lighten-4">
         <div class="container grey-text text-darken-4">
-          Photo by <a href="https://unsplash.com/@mrsrachelmcdermott?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Rachel McDermott</a> on <a href="https://unsplash.com/photos/SYCYR-bQe0g?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+          Photo by
+          <a
+            href="https://unsplash.com/@mrsrachelmcdermott?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+            >Rachel McDermott</a
+          >
+          on
+          <a
+            href="https://unsplash.com/photos/SYCYR-bQe0g?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+            >Unsplash</a
+          >
         </div>
       </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="/assets/js/finalresults.js"></script>
+    <script src="../js/finalresults.js"></script>
   </body>
 </html>
