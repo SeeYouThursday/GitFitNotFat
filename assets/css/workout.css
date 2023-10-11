@@ -4,7 +4,6 @@ html {
 }
 
 body {
-  /* background-color: aqua; */
   display: flex;
   min-height: 100vh;
   flex-direction: column;
@@ -13,13 +12,22 @@ body {
 main {
   flex: 1 0 auto;
 }
+
 .flex {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .hero-image {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../images/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg");
@@ -36,16 +44,19 @@ main {
   color: white;
 }
 
-#activity,
-#activity-submit {
+#activity {
   background-color: rgba(171, 171, 171, 0.499);
   border: 2px solid #b2dfdb;
-  border-radius: 5px; /* Black background with 0.5 opacity */
+  /* border-radius: 5px; Black background with 0.5 opacity */
   /* background-color: black; */
   padding: 5px;
   font-size: small;
   text-align: center;
 }
+
+/* #activity-submit {
+  margin: 5px;
+} */
 
 ul {
   color: white;

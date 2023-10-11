@@ -1,30 +1,30 @@
-body, html {
+/* body, html {
     height: 100%;
-}
+} */
 
 body {
-    /* background-color: aqua; */
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-  
-  main {
-    flex: 1 0 auto;
-  }
+  /* background-color: aqua; */
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
-  .flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+main {
+  flex: 1 0 auto;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
 .hero-final {
-    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-    background-image: url("../images/WorkoutBackgrounds/6DDEC4F2-B1A7-4EC5-B73C-AAD7013E7CD2_1_201_a.jpeg");
-      /* Set a specific height */
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: url("../images/WorkoutBackgrounds/6DDEC4F2-B1A7-4EC5-B73C-AAD7013E7CD2_1_201_a.jpeg");
+  /* Set a specific height */
   /* height: 50%; */
   /* Position and center the image to scale nicely on all screens */
   background-position: center;
@@ -34,21 +34,21 @@ body {
 }
 
 .selected-card {
-    background-color: rgba(233, 233, 233, 0.619);
-    border: 5px solid #f3f2f2;
-    margin: 15px;
-    height: 500px;
+  background-color: rgba(233, 233, 233, 0.619);
+  border: 5px solid #f3f2f2;
+  margin: 15px;
+  height: 500px;
 }
 
-@media screen and (max-width:1025px) {
+@media screen and (max-width: 1025px) {
   .selected-card {
-  height:400px;
-  width: 100%;
+    height: 400px;
+    width: 100%;
   }
 }
-@media screen and (max-width:601px) {
+@media screen and (max-width: 601px) {
   .selected-card {
-  height:100%;
-  width: 80%;
+    height: 100%;
+    width: 80%;
   }
 }
