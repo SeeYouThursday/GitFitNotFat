@@ -26,11 +26,13 @@ function durationToBurnCalories() {
     (recipeCalories / caloriesBurned) * workoutDurationValue
   );
   console.log(durationMinutes);
-  workoutDuration.textContent = `Duration: ${durationMinutes} Minutes`;
-  const caloriesBurnedCalculation = (durationMinutes / 30) * caloriesBurned;
+  workoutDuration.textContent = `Duration Minutes: ${durationMinutes}`;
+  const caloriesBurnedCalculation = Math.round(
+    (durationMinutes / 30) * caloriesBurned
+  );
   console.log(caloriesBurnedCalculation);
   caloriesBurnedDisplay.textContent =
-    "Calories Burned: " + caloriesBurnedCalculation + " calories";
+    "Calories Burned: " + caloriesBurnedCalculation;
 
   localStorage.setItem("Duration Minutes", durationMinutes);
   localStorage.setItem(
